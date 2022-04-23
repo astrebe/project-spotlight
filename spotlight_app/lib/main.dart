@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'loginscreen.dart';
+import 'LoginScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,9 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: loginscreen(
-        loginLabel: "Login: ",
-        passwordLabel: "Password: ",
+      body: LoginScreen(
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
