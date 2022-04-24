@@ -101,7 +101,7 @@ List<RecalledProduct> getTestData() {
       "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
       "Vietnam",
       22742,
-      "images\\storagerack.png");
+      "images/storagerack.png");
 
   RecalledProduct t2 = RecalledProduct(
       "Monti Kids Wooden Push Toys",
@@ -117,7 +117,7 @@ List<RecalledProduct> getTestData() {
       "Monti Kids Inc., of Orinda, California",
       "Vietnam",
       22741,
-      "images\\woodenkidtoy.png");
+      "images/woodenkidtoy.png");
 
   RecalledProduct t3 = RecalledProduct(
       "Nectar® Premier Mattresses",
@@ -139,7 +139,7 @@ List<RecalledProduct> getTestData() {
       "Elite Comfort Solutions LLC, of Newnan, Georgia",
       "United States",
       22740,
-      "images\\mattress.png");
+      "images/mattress.png");
 
   RecalledProduct t4 = RecalledProduct(
       "Overhead Garage Storage Racks",
@@ -155,7 +155,7 @@ List<RecalledProduct> getTestData() {
       "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
       "Vietnam",
       22742,
-      "images\\storagerack.png");
+      "images/storagerack.png");
   RecalledProduct t5 = RecalledProduct(
       "Overhead Garage Storage Racks",
       "This recall involves SafeRacks/Monsterrax Overhead Garage Storage Racks. The industrial-strength steel racks, which attach to the ceiling and are height-adjustable, come in  seven sizes including: 4 ft. by 4 ft., 4 ft. by 8 ft., 2 ft. by 6 ft., 3 ft. by 6 ft., 4 ft. by 6 ft., 3 ft. by 8 ft., and 2 ft. by 8 ft. The storage racks also were sold in two colors, hammertone (gray) or  white.",
@@ -170,7 +170,7 @@ List<RecalledProduct> getTestData() {
       "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
       "Vietnam",
       22742,
-      "images\\storagerack.png");
+      "images/storagerack.png");
 
   testData.add(t1);
   testData.add(t2);
