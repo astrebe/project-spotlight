@@ -8,7 +8,7 @@ void main() {
 //--
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-  
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         "/": (context) => MyHomePage(),
-        "/SpotlightView": (context) => SpotlightViewFrame(),
+        "/SpotlightView": (context) => const SpotlightViewFrame(),
       },
       initialRoute: "/",
     );
@@ -31,7 +31,6 @@ class _MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
