@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spotlight_app/RecalledProduct.dart';
+import 'package:spotlight_app/SpotlightFilterView.dart';
 import 'SpotlightViewFrame.dart';
 
 void main() {
@@ -34,14 +36,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("App")),
-      body: Text("List Goes Here"),
+      appBar: AppBar(title: const Text("App")),
+      body: const Text("List Goes Here"),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, "/SpotlightView");
         },
         tooltip: 'Add Grocery Item to List',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

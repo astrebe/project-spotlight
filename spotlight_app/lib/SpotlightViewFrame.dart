@@ -11,7 +11,7 @@ class SpotlightViewFrame extends StatefulWidget {
 }
 
 class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
-  static const double TILE_HEIGHT = 150;
+  static const double tileHeight = 150;
 
   final List<RecalledProduct> testData = getTestData();
 
@@ -22,7 +22,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
           backgroundColor: const Color.fromARGB(255, 153, 0, 0),
           title: const Text("All Recall Products"),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 204),
+        backgroundColor: Colors.grey.shade200,
         body: Column(
           children: <Widget>[
             Row(
@@ -85,7 +85,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                                         color: Colors.grey.shade300,
                                         blurRadius: 6)
                                   ]),
-                              height: TILE_HEIGHT,
+                              height: tileHeight,
                               child: Row(
                                 children: <Widget>[
                                   (testData[index].imgLoc != null)
@@ -93,7 +93,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                                           padding: const EdgeInsets.all(10),
                                           child: Image.asset(
                                             testData[index].imgLoc!,
-                                            height: TILE_HEIGHT,
+                                            height: tileHeight,
                                             width: 120,
                                           ))
                                       : const Text("[Image not Provided]"),
