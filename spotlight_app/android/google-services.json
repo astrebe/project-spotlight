@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488902786196",
+    "project_id": "spotlight-users",
+    "storage_bucket": "spotlight-users.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488902786196:android:24971034c7a37820450881",
+        "android_client_info": {
+          "package_name": "com.example.spotlight_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488902786196-eqaufgoq38loi1gtd176rfoqde2bj3sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKWBoGH8do6-t2GF-mr42Pv62JbbTli8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488902786196-eqaufgoq38loi1gtd176rfoqde2bj3sq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
