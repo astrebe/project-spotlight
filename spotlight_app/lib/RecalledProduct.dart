@@ -1,66 +1,67 @@
 class RecalledProduct {
-  String productName = "";
-  String productDesc = "";
-  String incidents = "";
-  String hazType = "";
-  String? remedy;
-  var recallDate = 0;
-  var units = 0;
-  int? compPhnum;
-  int? compEmail;
-  String soldAt = "";
-  String importers = "";
-  String countryOrigin = "";
-  var recallNum = 0;
-  String get getProductName => productName;
+  String _productName = "";
+  String _productDesc = "";
+  String _incidents = "";
+  String _hazType = "";
+  String? _remedy;
+  var _recallDate = 0;
+  var _units = 0;
+  int? _compPhnum;
+  int? _compEmail;
+  String _soldAt = "";
+  String _importers = "";
+  String _countryOrigin = "";
+  var _recallNum = 0;
 
-  set setProductName(String productName) => this.productName = productName;
+  String get getProductName => _productName;
 
-  get getProductDesc => productDesc;
+  set setProductName(String productName) => _productName = productName;
 
-  set setProductDesc( productDesc) => this.productDesc = productDesc;
+  get getProductDesc => _productDesc;
 
-  get getIncidents => incidents;
+  set setProductDesc(productDesc) => _productDesc = productDesc;
 
-  set setIncidents( incidents) => this.incidents = incidents;
+  get getIncidents => _incidents;
 
-  get getHazType => hazType;
+  set setIncidents(incidents) => _incidents = incidents;
 
-  set setHazType( hazType) => this.hazType = hazType;
+  get getHazType => _hazType;
 
-  get getRemedy => remedy;
+  set setHazType(hazType) => _hazType = hazType;
 
-  set setRemedy( remedy) => this.remedy = remedy;
+  get getRemedy => _remedy;
 
-  get getRecallDate => recallDate;
+  set setRemedy(remedy) => _remedy = remedy;
 
-  set setRecallDate( recallDate) => this.recallDate = recallDate;
+  get getRecallDate => _recallDate;
 
-  get getUnits => units;
+  set setRecallDate(recallDate) => _recallDate = recallDate;
 
-  set setUnits( units) => this.units = units;
+  get getUnits => _units;
 
-  get getCompPhnum => compPhnum;
+  set setUnits(units) => _units = units;
 
-  set setCompPhnum( compPhnum) => this.compPhnum = compPhnum;
+  get getCompPhnum => _compPhnum;
 
-  get getCompEmail => compEmail;
+  set setCompPhnum(compPhnum) => _compPhnum = compPhnum;
 
-  set setCompEmail( compEmail) => this.compEmail = compEmail;
+  get getCompEmail => _compEmail;
 
-  get getSoldAt => soldAt;
+  set setCompEmail(compEmail) => _compEmail = compEmail;
 
-  set setSoldAt( soldAt) => this.soldAt = soldAt;
+  get getSoldAt => _soldAt;
 
-  get getImporters => importers;
+  set setSoldAt(soldAt) => _soldAt = soldAt;
 
-  set setImporters( importers) => this.importers = importers;
+  get getImporters => _importers;
 
-  get getCountryOrigin => countryOrigin;
+  set setImporters(importers) => _importers = importers;
 
-  set setCountryOrigin( countryOrigin) => this.countryOrigin = countryOrigin;
+  get getCountryOrigin => _countryOrigin;
 
-  get getRecallNum => recallNum;
+  set setCountryOrigin(countryOrigin) => _countryOrigin = countryOrigin;
 
-  set setRecallNum( recallNum) => this.recallNum = recallNum;
+  get getRecallNum => _recallNum;
+
+  set setRecallNum(recallNum) => _recallNum = recallNum;
 }
