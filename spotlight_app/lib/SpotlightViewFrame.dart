@@ -39,7 +39,9 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                   height: 30,
                   width: 130,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/filter");
+                      },
                       child: Row(children: const <Widget>[
                         Padding(
                             padding: EdgeInsets.only(right: 33),

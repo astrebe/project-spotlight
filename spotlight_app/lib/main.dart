@@ -24,8 +24,9 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => MyHomePage(),
+        "/": (context) => const MyHomePage(),
         "/SpotlightView": (context) => const SpotlightViewFrame(),
+        "/filter": (context) => const SpotlightFilterView(),
       },
       initialRoute: "/",
     );
@@ -33,6 +34,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

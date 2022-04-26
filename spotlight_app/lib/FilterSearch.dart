@@ -6,7 +6,7 @@ This is mostly a proof of concept more than anything else for the test data.
 */
 
 class FilterSearch {
-  List<RecalledProduct> td;
+  List<RecalledProduct> td = <RecalledProduct>[];
 
   String? _keywords;
   String? _startDate;
@@ -43,6 +43,4 @@ class FilterSearch {
   get distributor => _distributor;
 
   set distributor(value) => _distributor = value;
-
-  FilterSearch({required this.td});
 }
