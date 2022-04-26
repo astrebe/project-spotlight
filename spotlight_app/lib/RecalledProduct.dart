@@ -1,88 +1,69 @@
 class RecalledProduct {
-  String productName = "";
-  String productDesc = "";
-  String incidents = "";
-  String hazType = "";
-  String? remedy;
-  var recallDate = "";
-  var units = 0;
-  int? compPhnum;
-  String? compEmail;
-  String soldAt = "";
-  String? importers;
-  String? distributors;
-  String? manufacturer;
-  String countryOrigin = "";
-  var recallNum = 0;
-  String? imgLoc;
+  String _productName = "";
+  String _productDesc = "";
+  String _incidents = "";
+  String _hazType = "";
+  String? _remedy;
+  var _recallDate = 0;
+  var _units = 0;
+  int? _compPhnum;
+  int? _compEmail;
+  String _soldAt = "";
+  String _importers = "";
+  String _countryOrigin = "";
+  var _recallNum = 0;
 
-  RecalledProduct(
-      this.productName,
-      this.productDesc,
-      this.incidents,
-      this.hazType,
-      this.remedy,
-      this.recallDate,
-      this.units,
-      this.compPhnum,
-      this.compEmail,
-      this.soldAt,
-      this.importers,
-      this.countryOrigin,
-      this.recallNum,
-      this.imgLoc);
+  String get getProductName => _productName;
 
-  String get getProductName => productName;
+  set setProductName(String productName) => _productName = productName;
 
-  set setProductName(String productName) => this.productName = productName;
+  get getProductDesc => _productDesc;
 
-  get getProductDesc => productDesc;
+  set setProductDesc(productDesc) => _productDesc = productDesc;
 
-  set setProductDesc(productDesc) => this.productDesc = productDesc;
+  get getIncidents => _incidents;
 
-  get getIncidents => incidents;
+  set setIncidents(incidents) => _incidents = incidents;
 
-  set setIncidents(incidents) => this.incidents = incidents;
+  get getHazType => _hazType;
 
-  get getHazType => hazType;
+  set setHazType(hazType) => _hazType = hazType;
 
-  set setHazType(hazType) => this.hazType = hazType;
+  get getRemedy => _remedy;
 
-  get getRemedy => remedy;
+  set setRemedy(remedy) => _remedy = remedy;
 
-  set setRemedy(remedy) => this.remedy = remedy;
+  get getRecallDate => _recallDate;
 
-  get getRecallDate => recallDate;
+  set setRecallDate(recallDate) => _recallDate = recallDate;
 
-  set setRecallDate(recallDate) => this.recallDate = recallDate;
+  get getUnits => _units;
 
-  get getUnits => units;
+  set setUnits(units) => _units = units;
 
-  set setUnits(units) => this.units = units;
+  get getCompPhnum => _compPhnum;
 
-  get getCompPhnum => compPhnum;
+  set setCompPhnum(compPhnum) => _compPhnum = compPhnum;
 
-  set setCompPhnum(compPhnum) => this.compPhnum = compPhnum;
+  get getCompEmail => _compEmail;
 
-  get getCompEmail => compEmail;
+  set setCompEmail(compEmail) => _compEmail = compEmail;
 
-  set setCompEmail(compEmail) => this.compEmail = compEmail;
+  get getSoldAt => _soldAt;
 
-  get getSoldAt => soldAt;
+  set setSoldAt(soldAt) => _soldAt = soldAt;
 
-  set setSoldAt(soldAt) => this.soldAt = soldAt;
+  get getImporters => _importers;
 
-  get getImporters => importers;
+  set setImporters(importers) => _importers = importers;
 
-  set setImporters(importers) => this.importers = importers;
+  get getCountryOrigin => _countryOrigin;
 
-  get getCountryOrigin => countryOrigin;
+  set setCountryOrigin(countryOrigin) => _countryOrigin = countryOrigin;
 
-  set setCountryOrigin(countryOrigin) => this.countryOrigin = countryOrigin;
+  get getRecallNum => _recallNum;
 
-  get getRecallNum => recallNum;
-
-  set setRecallNum(recallNum) => this.recallNum = recallNum;
+  set setRecallNum(recallNum) => _recallNum = recallNum;
 }
 
 List<RecalledProduct> getTestData() {
