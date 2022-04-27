@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  final String loginLabel = "Username: ";
+  final String loginLabel = "Email: ";
   final String passwordLabel = "Password: ";
 
   const LoginScreen({Key? key}) : super(key: key);
@@ -35,16 +35,19 @@ class LoginScreen extends StatelessWidget {
                   child: Column(children: <Widget>[
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    loginLabel,
-                    style: const TextStyle(fontWeight: FontWeight.w900),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Text(
+                      loginLabel,
+                      style: const TextStyle(fontWeight: FontWeight.w900),
+                    ),
                   ),
                 ),
                 const TextField(
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Username',
+                    labelText: 'Email',
                   ),
                 ),
               ])),
@@ -54,9 +57,12 @@ class LoginScreen extends StatelessWidget {
                     child: Column(children: <Widget>[
                   Align(
                     alignment: Alignment.bottomLeft,
-                    child: Text(
-                      passwordLabel,
-                      style: const TextStyle(fontWeight: FontWeight.w900),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: Text(
+                        passwordLabel,
+                        style: const TextStyle(fontWeight: FontWeight.w900),
+                      ),
                     ),
                   ),
                   const TextField(
@@ -82,8 +88,8 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {},
                       child: const Text('Forgot Password?',
                           style: TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline)),
+                            color: Colors.blue,
+                          )),
                     ),
                   )
                 ],
@@ -99,10 +105,10 @@ class LoginScreen extends StatelessWidget {
                       child: TextButton(
                         style: ButtonStyle(
                           alignment: Alignment.center,
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                              Colors.grey.shade400),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 153, 0, 0)),
                         ),
                         onPressed: () {},
                         child: const Text('Create Account'),
