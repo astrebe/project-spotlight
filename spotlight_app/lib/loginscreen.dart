@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  final String loginLabel = "Login: ";
+  final String loginLabel = "Username: ";
   final String passwordLabel = "Password: ";
 
   const LoginScreen({Key? key}) : super(key: key);
@@ -9,8 +9,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(15.0),
-        margin: const EdgeInsets.only(top: 45.0),
+        padding: const EdgeInsets.all(15.0),
+        margin: const EdgeInsets.only(top: 100.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -18,14 +18,15 @@ class LoginScreen extends StatelessWidget {
             Expanded(
                 child: Column(children: <Widget>[
               Expanded(
-                  child: Column(children: <Widget>[
-                const SizedBox(height: 5),
+                  child: Column(children: const <Widget>[
                 Align(
                   alignment: Alignment.center,
                   child: Text(
                     "Welcome to SpotLight!",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        fontStyle: FontStyle.italic),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -47,23 +48,26 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ])),
-              Expanded(
-                  child: Column(children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    passwordLabel,
-                    style: const TextStyle(fontWeight: FontWeight.w900),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Expanded(
+                    child: Column(children: <Widget>[
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      passwordLabel,
+                      style: const TextStyle(fontWeight: FontWeight.w900),
+                    ),
                   ),
-                ),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
+                  const TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
                   ),
-                ),
-              ])),
+                ])),
+              ),
               /*
         */
               Expanded(
@@ -72,12 +76,14 @@ class LoginScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: TextButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                         alignment: Alignment.center,
                       ),
                       onPressed: () {},
-                      child: const Text('Forgot Password',
-                          style: TextStyle(color: Colors.blue)),
+                      child: const Text('Forgot Password?',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline)),
                     ),
                   )
                 ],
@@ -87,6 +93,21 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
+                    SizedBox(
+                      width: 175,
+                      height: 50,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          alignment: Alignment.center,
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.red),
+                        ),
+                        onPressed: () {},
+                        child: const Text('Create Account'),
+                      ),
+                    ),
                     TextButton(
                       style: ButtonStyle(
                         alignment: Alignment.center,
@@ -95,17 +116,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                       onPressed: () {},
                       child: const Text('Continue Without Account'),
-                    ),
-                    TextButton(
-                      style: ButtonStyle(
-                        alignment: Alignment.center,
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
-                      ),
-                      onPressed: () {},
-                      child: const Text('Create Account'),
                     ),
                   ])),
             ])),
