@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(25.0),
         margin: const EdgeInsets.only(top: 100.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                     "Welcome to SpotLight!",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 35,
+                        fontSize: 32,
                         fontStyle: FontStyle.italic),
                     textAlign: TextAlign.center,
                   ),
@@ -105,8 +105,8 @@ class LoginScreen extends StatelessWidget {
                       child: TextButton(
                         style: ButtonStyle(
                           alignment: Alignment.center,
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey.shade400),
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 153, 0, 0)),
                         ),
