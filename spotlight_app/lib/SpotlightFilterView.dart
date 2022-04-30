@@ -14,12 +14,13 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
   var distText = "";
   var hazVal = "-";
   var catVal = "-";
-  Color mainColor = const Color.fromARGB(255, 153, 0, 0);
 
   DateTime selectedDateStart = DateTime.now();
   DateTime selectedDateEnd = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Color mainColor = const Color.fromARGB(255, 153, 0, 0);
+
+  Future<void> _selectDate(BuildContext context, int formNum) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -42,8 +43,32 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
         });
     if (picked != null && picked != selectedDateStart) {
       setState(() {
-        selectedDateStart = picked;
+        _inputFormVal(formNum, picked);
       });
+    }
+  }
+
+  void _inputFormVal(int form, var value) {
+    try {
+      if (form == 2)
+        hazVal = value;
+      else if (form == 3)
+        catVal = value;
+      else if (form == 4)
+        selectedDateStart = value;
+      else if (form == 5)
+        selectedDateEnd = value;
+      else if (form == 6)
+        manText = value;
+      else if (form == 7)
+        distText = value;
+      else {
+        throw Exception("Form Number not Found");
+      }
+    } on FormatException {
+      debugPrint("Wrong input val passed for Form");
+    } catch (e) {
+      debugPrint("$e");
     }
   }
 
@@ -68,14 +93,14 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
               UnderlineInputBorder(borderSide: BorderSide(color: mainColor)),
           //border: UnderlineInputBorder(),
           labelText: 'Keyword Search',
-          labelStyle: TextStyle(color: Color.fromARGB(255, 77, 77, 77)),
+          labelStyle: const TextStyle(color: Color.fromARGB(255, 77, 77, 77)),
           hintText: 'Keywords',
         ),
       ),
     );
   }
 
-  Widget _dropDownSearch(String label, List<String> list) {
+  Widget _dropDownSearch(String label, List<String> list, int formNum) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 10),
       child: Column(
@@ -110,7 +135,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                   ),
                   onChanged: (String? newValue) {
                     setState(() {
-                      hazVal = newValue!;
+                      _inputFormVal(formNum, newValue!);
                     });
                   },
                   items: list.map<DropdownMenuItem<String>>((String value) {
@@ -124,7 +149,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
     );
   }
 
-  Widget _datePicker(String label) {
+  Widget _datePicker(String label, int formNum) {
     return Container(
       margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 10),
       child: Column(
@@ -144,14 +169,14 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                     style: TextStyle(color: Color.fromARGB(255, 100, 0, 0)),
                   ),
                   onPressed: () {
-                    _selectDate(context);
+                    _selectDate(context, formNum);
                   },
                 ))
           ]),
     );
   }
 
-  Widget _businessKeySearch(String label) {
+  Widget _businessKeySearch(String label, int formNum) {
     return Container(
       margin: const EdgeInsets.only(bottom: 25, left: 20, right: 10, top: 20),
       width: 160,
@@ -160,7 +185,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
         cursorColor: mainColor,
         onChanged: (newText) {
           setState(() {
-            manText = newText;
+            _inputFormVal(formNum, newText);
           });
         },
         decoration: InputDecoration(
@@ -192,33 +217,34 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
             color: Colors.grey.shade200,
             height: double.maxFinite,
             child: SingleChildScrollView(
-                child: Container(
-                    child: Column(children: <Widget>[
+                child: Column(children: <Widget>[
               Container(child: _keyWordSearch()),
               Row(
                 children: <Widget>[
-                  _dropDownSearch("Hazard Type",
-                      <String>['-', 'Exploding', "Chemical Burns", 'Falling']),
+                  _dropDownSearch(
+                      "Hazard Type",
+                      <String>['-', 'Exploding', "Chemical Burns", 'Falling'],
+                      2),
                   _dropDownSearch("Category",
-                      <String>['-', 'Baby Carriers', "Furniture", 'Toys'])
+                      <String>['-', 'Baby Carriers', "Furniture", 'Toys'], 3)
                 ],
               ),
               Row(children: <Widget>[
-                _datePicker("Start Date"),
-                _datePicker("End Date"),
+                _datePicker("Start Date", 4),
+                _datePicker("End Date", 5),
               ]),
               Row(
                 children: <Widget>[
-                  _businessKeySearch("Manufacturer"),
-                  _businessKeySearch("Distributor"),
+                  _businessKeySearch("Manufacturer", 6),
+                  _businessKeySearch("Distributor", 7),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(right: 20, top: 10),
-                      padding: EdgeInsets.all(8),
+                      margin: const EdgeInsets.only(right: 20, top: 10),
+                      padding: const EdgeInsets.all(8),
                       width: 150,
                       child: ElevatedButton(
                         child: Row(children: const <Widget>[
@@ -232,6 +258,6 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                       ))
                 ],
               )
-            ])))));
+            ]))));
   }
 }
