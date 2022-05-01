@@ -115,17 +115,46 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     TextButton(
+                      child: const Text("Continue Without Account"),
                       style: ButtonStyle(
                         alignment: Alignment.center,
                         foregroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
-                      onPressed: () {},
-                      child: const Text('Continue Without Account'),
+                      onPressed: () {
+                        NoAccountPopUp(context);
+                      },
                     ),
                   ])),
             ])),
           ],
         ));
+  }
+
+  void GoBack(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
+  Future NoAccountPopUp(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Are You Sure?'),
+        content: const Text(
+            "Not creating an account prevents you from being able to get the most out of SpotLight. SpotLight relies on collecting information in order to keep users up to date with the latest recalls in their area. Without your information the benefits of using SpotLight are greatly reduced."),
+        actions: [
+          TextButton(
+            child: const Text("Go Back"),
+            onPressed: () {
+              GoBack(context);
+            },
+          ),
+          TextButton(
+            child: const Text("Proceed"),
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
   }
 }
