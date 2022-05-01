@@ -1,190 +1,347 @@
+//Mostly autogenned code courtesy of https://app.quicktype.io/ (Quickly converts JSON -> classes and back, but we only need one way)
+
+// To parse this JSON data, do
+//
+//     final recalledProduct = recalledProductFromJson(jsonString);
+
+import 'dart:convert';
+
+List<RecalledProduct> recalledProductFromJson(String str) =>
+    List<RecalledProduct>.from(
+        json.decode(str).map((x) => RecalledProduct.fromJson(x)));
+
+String recalledProductToJson(List<RecalledProduct> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class RecalledProduct {
-  String _productName = "";
-  String _productDesc = "";
-  String _incidents = "";
-  String _hazType = "";
-  String? _remedy;
-  String _recallDate = "";
-  var _units = 0;
-  int? _compPhnum;
-  String? _compEmail;
-  String _soldAt = "";
-  String _importers = "";
-  String _countryOrigin = "";
-  var _recallNum = 0;
-  String? _imgLoc = "";
- 
-  RecalledProduct(
-    this._productName,
-    this._productDesc,
-    this._incidents,
-    this._hazType,
-    this._remedy,
-    this._recallDate,
-    this._units,
-    this._compPhnum,
-    this._compEmail,
-    this._soldAt,
-    this._importers,
-    this._countryOrigin,
-    this._recallNum,
-    this._imgLoc
-  );
-  
-  String get productName => _productName;
+  RecalledProduct({
+    this.recallId,
+    this.recallNumber,
+    this.recallDate,
+    this.description,
+    this.url,
+    this.title,
+    this.consumerContact,
+    this.lastPublishDate,
+    this.products,
+    this.inconjunctions,
+    this.images,
+    this.injuries,
+    this.manufacturers,
+    this.retailers,
+    this.importers,
+    this.distributors,
+    this.soldAtLabel,
+    this.manufacturerCountries,
+    this.productUpCs,
+    this.hazards,
+    this.remedies,
+    this.remedyOptions,
+  });
 
-  set productName(String productName) => _productName = productName;
+  int? recallId;
+  String? recallNumber;
+  DateTime? recallDate;
+  String? description;
+  String? url;
+  String? title;
+  String? consumerContact;
+  DateTime? lastPublishDate;
+  List<Product>? products;
+  List<Inconjunction>? inconjunctions;
+  List<Image>? images;
+  List<Injury>? injuries;
+  List<Distributor>? manufacturers;
+  List<Distributor>? retailers;
+  List<Distributor>? importers;
+  List<Distributor>? distributors;
+  dynamic soldAtLabel;
+  List<ManufacturerCountry>? manufacturerCountries;
+  List<dynamic>? productUpCs;
+  List<Hazard>? hazards;
+  List<Injury>? remedies;
+  List<RemedyOption>? remedyOptions;
 
-  get productDesc => _productDesc;
+  factory RecalledProduct.fromJson(Map<String, dynamic> json) =>
+      RecalledProduct(
+        recallId: json["RecallID"],
+        recallNumber: json["RecallNumber"],
+        recallDate: json["RecallDate"] == null
+            ? null
+            : DateTime.parse(json["RecallDate"]),
+        description: json["Description"],
+        url: json["URL"],
+        title: json["Title"],
+        consumerContact: json["ConsumerContact"],
+        lastPublishDate: json["LastPublishDate"] == null
+            ? null
+            : DateTime.parse(json["LastPublishDate"]),
+        products: json["Products"] == null
+            ? null
+            : List<Product>.from(
+                json["Products"].map((x) => Product.fromJson(x))),
+        inconjunctions: json["Inconjunctions"] == null
+            ? null
+            : List<Inconjunction>.from(
+                json["Inconjunctions"].map((x) => Inconjunction.fromJson(x))),
+        images: json["Images"] == null
+            ? null
+            : List<Image>.from(json["Images"].map((x) => Image.fromJson(x))),
+        injuries: json["Injuries"] == null
+            ? null
+            : List<Injury>.from(
+                json["Injuries"].map((x) => Injury.fromJson(x))),
+        manufacturers: json["Manufacturers"] == null
+            ? null
+            : List<Distributor>.from(
+                json["Manufacturers"].map((x) => Distributor.fromJson(x))),
+        retailers: json["Retailers"] == null
+            ? null
+            : List<Distributor>.from(
+                json["Retailers"].map((x) => Distributor.fromJson(x))),
+        importers: json["Importers"] == null
+            ? null
+            : List<Distributor>.from(
+                json["Importers"].map((x) => Distributor.fromJson(x))),
+        distributors: json["Distributors"] == null
+            ? null
+            : List<Distributor>.from(
+                json["Distributors"].map((x) => Distributor.fromJson(x))),
+        soldAtLabel: json["SoldAtLabel"],
+        manufacturerCountries: json["ManufacturerCountries"] == null
+            ? null
+            : List<ManufacturerCountry>.from(json["ManufacturerCountries"]
+                .map((x) => ManufacturerCountry.fromJson(x))),
+        productUpCs: json["ProductUPCs"] == null
+            ? null
+            : List<dynamic>.from(json["ProductUPCs"].map((x) => x)),
+        hazards: json["Hazards"] == null
+            ? null
+            : List<Hazard>.from(json["Hazards"].map((x) => Hazard.fromJson(x))),
+        remedies: json["Remedies"] == null
+            ? null
+            : List<Injury>.from(
+                json["Remedies"].map((x) => Injury.fromJson(x))),
+        remedyOptions: json["RemedyOptions"] == null
+            ? null
+            : List<RemedyOption>.from(
+                json["RemedyOptions"].map((x) => RemedyOption.fromJson(x))),
+      );
 
-  set productDesc(productDesc) => _productDesc = productDesc;
-
-  get incidents => _incidents;
-
-  set incidents(incidents) => _incidents = incidents;
-
-  get hazType => _hazType;
-
-  set hazType(hazType) => _hazType = hazType;
-
-  get remedy => _remedy;
-
-  set remedy(remedy) => _remedy = remedy;
-
-  get recallDate => _recallDate;
-
-  set recallDate(recallDate) => _recallDate = recallDate;
-
-  get units => _units;
-
-  set units(units) => _units = units;
-
-  get compPhnum => _compPhnum;
-
-  set compPhnum(compPhnum) => _compPhnum = compPhnum;
-
-  get compEmail => _compEmail;
-
-  set compEmail(compEmail) => _compEmail = compEmail;
-
-  get soldAt => _soldAt;
-
-  set soldAt(soldAt) => _soldAt = soldAt;
-
-  get importers => _importers;
-
-  set importers(importers) => _importers = importers;
-
-  get countryOrigin => _countryOrigin;
-
-  set countryOrigin(countryOrigin) => _countryOrigin = countryOrigin;
-
-  get recallNum => _recallNum;
-
-  set recallNum(recallNum) => _recallNum = recallNum;
-
-  String? get imgLoc => _imgLoc;
-
-  set imgLoc(String? value) => _imgLoc = value;
+  Map<String, dynamic> toJson() => {
+        "RecallID": recallId,
+        "RecallNumber": recallNumber,
+        "RecallDate": recallDate == null ? null : recallDate!.toIso8601String(),
+        "Description": description,
+        "URL": url,
+        "Title": title,
+        "ConsumerContact": consumerContact,
+        "LastPublishDate":
+            lastPublishDate == null ? null : lastPublishDate!.toIso8601String(),
+        "Products": products == null
+            ? null
+            : List<dynamic>.from(products!.map((x) => x.toJson())),
+        "Inconjunctions": inconjunctions == null
+            ? null
+            : List<dynamic>.from(inconjunctions!.map((x) => x.toJson())),
+        "Images": images == null
+            ? null
+            : List<dynamic>.from(images!.map((x) => x.toJson())),
+        "Injuries": injuries == null
+            ? null
+            : List<dynamic>.from(injuries!.map((x) => x.toJson())),
+        "Manufacturers": manufacturers == null
+            ? null
+            : List<dynamic>.from(manufacturers!.map((x) => x.toJson())),
+        "Retailers": retailers == null
+            ? null
+            : List<dynamic>.from(retailers!.map((x) => x.toJson())),
+        "Importers": importers == null
+            ? null
+            : List<dynamic>.from(importers!.map((x) => x.toJson())),
+        "Distributors": distributors == null
+            ? null
+            : List<dynamic>.from(distributors!.map((x) => x.toJson())),
+        "SoldAtLabel": soldAtLabel,
+        "ManufacturerCountries": manufacturerCountries == null
+            ? null
+            : List<dynamic>.from(manufacturerCountries!.map((x) => x.toJson())),
+        "ProductUPCs": productUpCs == null
+            ? null
+            : List<dynamic>.from(productUpCs!.map((x) => x)),
+        "Hazards": hazards == null
+            ? null
+            : List<dynamic>.from(hazards!.map((x) => x.toJson())),
+        "Remedies": remedies == null
+            ? null
+            : List<dynamic>.from(remedies!.map((x) => x.toJson())),
+        "RemedyOptions": remedyOptions == null
+            ? null
+            : List<dynamic>.from(remedyOptions!.map((x) => x.toJson())),
+      };
 }
 
-List<RecalledProduct> getTestData() {
-  List<RecalledProduct> testData = <RecalledProduct>[];
-  RecalledProduct t1 = RecalledProduct(
-      "Overhead Garage Storage Racks",
-      "This recall involves SafeRacks/Monsterrax Overhead Garage Storage Racks. The industrial-strength steel racks, which attach to the ceiling and are height-adjustable, come in  seven sizes including: 4 ft. by 4 ft., 4 ft. by 8 ft., 2 ft. by 6 ft., 3 ft. by 6 ft., 4 ft. by 6 ft., 3 ft. by 8 ft., and 2 ft. by 8 ft. The storage racks also were sold in two colors, hammertone (gray) or  white.",
-      "SafeRacks/Monsterrax has received 55 reports of the racks falling, including one report of an injury where the corners of a ceiling mounted rack fell and bruised and cut a consumer’s face.",
-      "The hex bolts in the overhead garage storage racks can be defective, causing the rack to collapse from the ceiling, posing an impact injury hazard.",
-      "Consumers with the recalled Overhead Garage Storage Racks should immediately unload all items from the racks and contact SafeRacks/Monsterrax to receive free replacement bolts. SafeRacks/Monsterrax has contacted all known purchasers of the Overhead Garage Storage Racks to provide free replacement bolts.",
-      "April 21, 2022",
-      12800,
-      8779272168,
-      "consumersupport@saferacks.com",
-      "Online at Costco.com, amazon.com, saferacks.com, monsterrax.com and other websites from September 2021 through December 2021 for about \$140.",
-      "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
-      "Vietnam",
-      22742,
-      "images/storagerack.png");
+class Distributor {
+  Distributor({
+    this.name,
+    this.companyId,
+  });
 
-  RecalledProduct t2 = RecalledProduct(
-      "Monti Kids Wooden Push Toys",
-      "This recall involves Push Toys which are included with the Level 7 of the Monti Kids Program subscription box. The Push Toy consists of a wooden handle attached to a rolling cylinder, which contains wooden balls. The lot numbers 0D41 and 1A41, “Montessori designs, Ethically Made in Vietnam, and ASTM CPSIA Safety Certified,” are printed on the underside of the handle, facing the rolling cylinder.",
-      "Monti Kids has received 145 reports of the toy’s rolling cylinder separating.  No injuries have been reported.",
-      "The toy’s rolling cylinder can separate, exposing the balls inside, posing a choking hazard to children.",
-      "Consumers should immediately take the recalled toy away from children, dispose of the toy by throwing it into the trash, and contact Monti Kids to receive a \$40 refund. The firm is contacting all known purchasers directly.",
-      "April 21, 2022",
-      1375,
-      8006743845,
-      "customercare@montikids.com",
-      "Online at Montikids.com from April 2021 through January 2022 as one item in the level 7 Monti Kids Program subscription box for about \$300.",
-      "Monti Kids Inc., of Orinda, California",
-      "Vietnam",
-      22741,
-      "images/woodenkidtoy.png");
+  String? name;
+  String? companyId;
 
-  RecalledProduct t3 = RecalledProduct(
-      "Nectar® Premier Mattresses",
-      """This recall involves certain Nectar Premier Mattresses manufactured on two specific dates:  
-    King size: manufactured on 9/24/2021; and 
-    Queen size: manufactured on 9/27/2021.
-    The recalled mattresses have a white poly-blend top cover with black side panels and a vertical purple sash, and the foot of the mattresses is marked with the large (13” long, 2” tall) 
-    embroidered “nectar” logo and the word “Nectar” imprinted in white, and also have the date of manufacture on the white tag. 
-    Elite Comfort Solutions, the date of manufacture in MM/DD/YY format (9/24/21 for king mattresses or 9/27/21 for queen mattresses), the model number, 
-    CHILL and “Prototype ID:ECS2003RHCH” can be found on the bottom portion of the white tag which is located at the head of the mattress.""",
-      "None reported",
-      "The recalled mattresses failed to meet the mandatory federal flammability standard for mattresses, posing a fire hazard.",
-      "Consumers should contact Nectar Sleep for a free replacement mattress (including free delivery) or a full refund, to be provided after free removal and disposal of the recalled mattress through Elite Comfort Solutions. Nectar Sleep is contacting all known purchasers directly.",
-      "April 21, 2022",
-      700,
-      8552314633,
-      "assistance@nectarsleep.com",
-      "www.nectarsleep.com from July 2021 through September 2021 for between \$1,300 and \$1,600.",
-      "Elite Comfort Solutions LLC, of Newnan, Georgia",
-      "United States",
-      22740,
-      "images/mattress.png");
+  factory Distributor.fromJson(Map<String, dynamic> json) => Distributor(
+        name: json["Name"],
+        companyId: json["CompanyID"],
+      );
 
-  RecalledProduct t4 = RecalledProduct(
-      "Overhead Garage Storage Racks",
-      "This recall involves SafeRacks/Monsterrax Overhead Garage Storage Racks. The industrial-strength steel racks, which attach to the ceiling and are height-adjustable, come in  seven sizes including: 4 ft. by 4 ft., 4 ft. by 8 ft., 2 ft. by 6 ft., 3 ft. by 6 ft., 4 ft. by 6 ft., 3 ft. by 8 ft., and 2 ft. by 8 ft. The storage racks also were sold in two colors, hammertone (gray) or  white.",
-      "SafeRacks/Monsterrax has received 55 reports of the racks falling, including one report of an injury where the corners of a ceiling mounted rack fell and bruised and cut a consumer’s face.",
-      "The hex bolts in the overhead garage storage racks can be defective, causing the rack to collapse from the ceiling, posing an impact injury hazard.",
-      "Consumers with the recalled Overhead Garage Storage Racks should immediately unload all items from the racks and contact SafeRacks/Monsterrax to receive free replacement bolts. SafeRacks/Monsterrax has contacted all known purchasers of the Overhead Garage Storage Racks to provide free replacement bolts.",
-      "April 21, 2022",
-      12800,
-      8779272168,
-      "consumersupport@saferacks.com",
-      "Online at Costco.com, amazon.com, saferacks.com, monsterrax.com and other websites from September 2021 through December 2021 for about \$140.",
-      "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
-      "Vietnam",
-      22742,
-      "images/storagerack.png");
-  RecalledProduct t5 = RecalledProduct(
-      "Overhead Garage Storage Racks",
-      "This recall involves SafeRacks/Monsterrax Overhead Garage Storage Racks. The industrial-strength steel racks, which attach to the ceiling and are height-adjustable, come in  seven sizes including: 4 ft. by 4 ft., 4 ft. by 8 ft., 2 ft. by 6 ft., 3 ft. by 6 ft., 4 ft. by 6 ft., 3 ft. by 8 ft., and 2 ft. by 8 ft. The storage racks also were sold in two colors, hammertone (gray) or  white.",
-      "SafeRacks/Monsterrax has received 55 reports of the racks falling, including one report of an injury where the corners of a ceiling mounted rack fell and bruised and cut a consumer’s face.",
-      "The hex bolts in the overhead garage storage racks can be defective, causing the rack to collapse from the ceiling, posing an impact injury hazard.",
-      "Consumers with the recalled Overhead Garage Storage Racks should immediately unload all items from the racks and contact SafeRacks/Monsterrax to receive free replacement bolts. SafeRacks/Monsterrax has contacted all known purchasers of the Overhead Garage Storage Racks to provide free replacement bolts.",
-      "April 21, 2022",
-      12800,
-      8779272168,
-      "consumersupport@saferacks.com",
-      "Online at Costco.com, amazon.com, saferacks.com, monsterrax.com and other websites from September 2021 through December 2021 for about \$140.",
-      "Eagle Industrial Group Inc., of Rancho Santa Margarita, California",
-      "Vietnam",
-      22742,
-      "images/storagerack.png");
+  Map<String, dynamic> toJson() => {
+        "Name": name,
+        "CompanyID": companyId,
+      };
+}
 
-  testData.add(t1);
-  testData.add(t2);
-  testData.add(t3);
-  testData.add(t4);
-  testData.add(t5);
-  testData.add(t1);
-  testData.add(t2);
-  testData.add(t3);
-  testData.add(t4);
-  testData.add(t5);
+class Hazard {
+  Hazard({
+    this.name,
+    this.hazardType,
+    this.hazardTypeId,
+  });
 
-  return testData;
+  String? name;
+  String? hazardType;
+  String? hazardTypeId;
+
+  factory Hazard.fromJson(Map<String, dynamic> json) => Hazard(
+        name: json["Name"],
+        hazardType: json["HazardType"],
+        hazardTypeId: json["HazardTypeID"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Name": name,
+        "HazardType": hazardType,
+        "HazardTypeID": hazardTypeId,
+      };
+}
+
+class Image {
+  Image({
+    this.url,
+    this.caption,
+  });
+
+  String? url;
+  String? caption;
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        url: json["URL"],
+        caption: json["Caption"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "URL": url,
+        "Caption": caption,
+      };
+}
+
+class Inconjunction {
+  Inconjunction({
+    this.url,
+  });
+
+  String? url;
+
+  factory Inconjunction.fromJson(Map<String, dynamic> json) => Inconjunction(
+        url: json["URL"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "URL": url,
+      };
+}
+
+class Injury {
+  Injury({
+    this.name,
+  });
+
+  String? name;
+
+  factory Injury.fromJson(Map<String, dynamic> json) => Injury(
+        name: json["Name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Name": name,
+      };
+}
+
+class ManufacturerCountry {
+  ManufacturerCountry({
+    this.country,
+  });
+
+  String? country;
+
+  factory ManufacturerCountry.fromJson(Map<String, dynamic> json) =>
+      ManufacturerCountry(
+        country: json["Country"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Country": country,
+      };
+}
+
+class Product {
+  Product({
+    this.name,
+    this.description,
+    this.model,
+    this.type,
+    this.categoryId,
+    this.numberOfUnits,
+  });
+
+  String? name;
+  String? description;
+  String? model;
+  String? type;
+  String? categoryId;
+  String? numberOfUnits;
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        name: json["Name"],
+        description: json["Description"],
+        model: json["Model"],
+        type: json["Type"],
+        categoryId: json["CategoryID"],
+        numberOfUnits: json["NumberOfUnits"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Name": name,
+        "Description": description,
+        "Model": model,
+        "Type": type,
+        "CategoryID": categoryId,
+        "NumberOfUnits": numberOfUnits,
+      };
+}
+
+class RemedyOption {
+  RemedyOption({
+    this.option,
+  });
+
+  String? option;
+
+  factory RemedyOption.fromJson(Map<String, dynamic> json) => RemedyOption(
+        option: json["Option"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Option": option,
+      };
 }
