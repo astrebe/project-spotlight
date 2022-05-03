@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextFormField(
+                  obscureText: false,
                   autofocus: true,
                   onChanged: (newText) {
                     setState(() {
