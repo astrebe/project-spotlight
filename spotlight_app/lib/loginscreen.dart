@@ -120,7 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: const ButtonStyle(
                         alignment: Alignment.center,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        ForgotPassword(context);
+                      },
                       child: const Text('Forgot Password?',
                           style: TextStyle(
                             color: Colors.blue,
@@ -227,6 +229,29 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             child: const Text("Proceed"),
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future ForgotPassword(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Forgot Password'),
+        content: const Text(
+            "Please enter in your email associated with the account in order to retrieve your password!"),
+        actions: [
+          TextButton(
+            child: const Text("Go Back"),
+            onPressed: () {
+              GoBack(context);
+            },
+          ),
+          TextButton(
+            child: const Text("Submit Request"),
             onPressed: () {},
           ),
         ],
