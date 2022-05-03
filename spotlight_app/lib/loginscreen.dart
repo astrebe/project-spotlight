@@ -17,6 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String _errorMessage = "";
   String _loginEmail = "";
   String _loginPassword = "";
+  String _newEmail = "";
+  String _newPassword = "";
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 153, 0, 0)),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          newAccountPopUp(context);
+                        },
                         child: const Text('Create Account'),
                       ),
                     ),
@@ -254,6 +258,64 @@ class _LoginScreenState extends State<LoginScreen> {
             child: const Text("Submit Request"),
             onPressed: () {},
           ),
+        ],
+      ),
+    );
+  }
+
+  Future newAccountPopUp(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('New Account'),
+        content: const Text(
+            "Create a new account using a new email and strong password."),
+        actions: [
+          TextFormField(
+            autofocus: true,
+            onChanged: (newText) {
+              setState(() {
+                _newEmail = newText;
+              });
+            },
+            decoration: InputDecoration(labelText: "New Email"),
+          ),
+          TextFormField(
+            autofocus: true,
+            onChanged: (newText) {
+              setState(() {
+                _newPassword = newText;
+              });
+            },
+            decoration: InputDecoration(labelText: "New Password"),
+          ),
+          TextButton(
+            child: const Text("Go Back"),
+            onPressed: () {
+              GoBack(context);
+            },
+          ),
+          TextButton(
+            child: const Text("Create"),
+            onPressed: () async {
+              try {
+                UserCredential userCredential = await FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: _newEmail, password: _newPassword);
+                GoBack(context);
+              } on FirebaseAuthException catch (e) {
+                if (e.code == "weak-password") {
+                  _errorMessage = "The Password Provided was too Weak.";
+                } else if (e.code == "email-already-in-use") {
+                  _errorMessage = "An Account Already Exists for that Email.";
+                }
+                setState(() {});
+              } catch (e) {
+                print(e);
+              }
+            },
+          ),
+          Text(_errorMessage, style: TextStyle(color: Colors.red)),
         ],
       ),
     );
