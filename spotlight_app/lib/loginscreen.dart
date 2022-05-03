@@ -1,10 +1,22 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: must_be_immutable
 
-class LoginScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import "package:firebase_auth/firebase_auth.dart";
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final String loginLabel = "Email: ";
   final String passwordLabel = "Password: ";
 
-  const LoginScreen({Key? key}) : super(key: key);
+  String _errorMessage = "";
+  String _loginEmail = "";
+  String _loginPassword = "";
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +55,24 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const TextField(
+                TextFormField(
+                  autofocus: true,
+                  onChanged: (newText) {
+                    setState(() {
+                      _loginEmail = newText;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: "Email",
+                  ),
+                ),
+                /*const TextField(
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
                   ),
-                ),
+                ),*/
               ])),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -65,13 +88,24 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const TextField(
+                  TextFormField(
+                    autofocus: true,
+                    onChanged: (newText) {
+                      setState(() {
+                        _loginPassword = newText;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                    ),
+                  ),
+                  /*const TextField(
                     obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
                     ),
-                  ),
+                  ),*/
                 ])),
               ),
               /*
@@ -94,6 +128,47 @@ class LoginScreen extends StatelessWidget {
                   )
                 ],
               )),
+              Expanded(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                    SizedBox(
+                      width: 175,
+                      height: 50,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          alignment: Alignment.center,
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 153, 0, 0)),
+                        ),
+                        onPressed: () async {
+                          try {
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .signInWithEmailAndPassword(
+                                    email: _loginEmail,
+                                    password: _loginPassword);
+                            /*Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Put Page Name Here));
+                                */
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == "user-not-fount") {
+                              _errorMessage = "No User Found for that Email.";
+                            } else if (e.code == "wrong-password") {
+                              _errorMessage =
+                                  "Wrong Password Provided for User.";
+                            }
+                          }
+                        },
+                        child: const Text('Login'),
+                      ),
+                    ),
+                  ])),
               Expanded(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
