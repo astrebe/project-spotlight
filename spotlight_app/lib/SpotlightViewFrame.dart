@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:spotlight_app/ApiService.dart';
 import "RecalledProduct.dart";
 import 'package:flutter/src/widgets/image.dart' as flutterImage;
+import 'package:spotlight_app/IndividualProductFrame.dart';
 
 class SpotlightViewFrame extends StatefulWidget {
   const SpotlightViewFrame({Key? key}) : super(key: key);
@@ -92,7 +93,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                             _dbListViewDescText(index)
                           ],
                         )),
-                        _dbListViewArrow()
+                        _dbListViewArrow(index)
                       ],
                     ),
                   )));
@@ -118,6 +119,8 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       child: Text(
         _db![index].title!,
         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -133,17 +136,24 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
             )));
   }
 
-  Widget _dbListViewArrow() {
+  Widget _dbListViewArrow(int index) {
     return SizedBox(
       width: 30,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Icon(
-            Icons.arrow_forward_ios_rounded,
-            color: Color.fromARGB(255, 153, 0, 0),
-          )
+        children: <Widget>[
+          IconButton(
+              iconSize: 20,
+              icon: const Icon(Icons.arrow_forward_ios_rounded,
+                  color: Color.fromARGB(255, 153, 0, 0)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            IndividualProductFrame(_db![index])));
+              }),
         ],
       ),
     );
