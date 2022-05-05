@@ -69,13 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: "Email",
                   ),
                 ),
-                /*const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                  ),
-                ),*/
               ])),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -102,13 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: "Password",
                     ),
                   ),
-                  /*const TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                  ),*/
                 ])),
               ),
               /*
