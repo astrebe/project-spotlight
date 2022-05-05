@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _loginPassword = "";
   String _newEmail = "";
   String _newPassword = "";
+  String _resetEmail = "";
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +235,15 @@ class _LoginScreenState extends State<LoginScreen> {
         content: const Text(
             "Please enter in your email associated with the account in order to retrieve your password!"),
         actions: [
+          TextFormField(
+            autofocus: true,
+            onChanged: (newText) {
+              setState(() {
+                _resetEmail = newText;
+              });
+            },
+            decoration: InputDecoration(labelText: "Email"),
+          ),
           TextButton(
             child: const Text("Go Back"),
             onPressed: () {
@@ -242,8 +252,21 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             child: const Text("Submit Request"),
-            onPressed: () {},
+            onPressed: () async {
+              try {
+                FirebaseAuth.instance
+                    .sendPasswordResetEmail(email: _resetEmail);
+                Text("Reset Sent");
+              } on FirebaseAuthException catch (e) {
+                if (e.code == "user-not-found") {
+                  _errorMessage = "User does not exist with that email";
+                } else if (e.code == "invalid-email") {
+                  _errorMessage = "Invalid Email";
+                }
+              }
+            },
           ),
+          Text(_errorMessage, style: TextStyle(color: Colors.red)),
         ],
       ),
     );
