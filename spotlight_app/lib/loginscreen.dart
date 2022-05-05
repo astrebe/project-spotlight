@@ -288,6 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 UserCredential userCredential = await FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
                         email: _newEmail, password: _newPassword);
+                FirebaseAuth.instance.currentUser?.sendEmailVerification();
                 GoBack(context);
               } on FirebaseAuthException catch (e) {
                 if (e.code == "weak-password") {
