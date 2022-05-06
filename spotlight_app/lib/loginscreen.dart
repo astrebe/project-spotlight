@@ -204,6 +204,44 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.of(context).pop();
   }
 
+  Future InvalidFormat(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Invalid Email'),
+        content: const Text(
+            "The email you entered was not a valid format! Try again!"),
+        actions: [
+          TextButton(
+            child: const Text("Go Back"),
+            onPressed: () {
+              GoBack(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future DoesNotExist(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Account not Found'),
+        content: const Text(
+            "The email you entered is not currently associated with an account on Spotlight!"),
+        actions: [
+          TextButton(
+            child: const Text("Go Back"),
+            onPressed: () {
+              GoBack(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Future NoAccountPopUp(BuildContext context) {
     return showDialog(
       context: context,
@@ -254,17 +292,18 @@ class _LoginScreenState extends State<LoginScreen> {
             child: const Text("Submit Request"),
             onPressed: () async {
               try {
-                FirebaseAuth.instance
+                await FirebaseAuth.instance
                     .sendPasswordResetEmail(email: _resetEmail);
                 Text("Reset Sent");
               } on FirebaseAuthException catch (e) {
                 if (e.code == "user-not-found") {
                   _errorMessage = "User does not exist with that email";
+                  DoesNotExist(context);
                 } else if (e.code == "invalid-email") {
                   _errorMessage = "Invalid Email";
+                  InvalidFormat(context);
                 }
               }
-              Navigator.of(context).pop();
             },
           ),
           Text(_errorMessage, style: TextStyle(color: Colors.red)),
