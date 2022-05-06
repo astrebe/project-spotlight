@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:spotlight_app/ApiService.dart';
 import "RecalledProduct.dart";
-import 'package:flutter/src/widgets/image.dart' as flutterImage;
-import 'package:spotlight_app/IndividualProductFrame.dart';
+import 'package:flutter/src/widgets/image.dart' as flutter_image;
+import "IndividualProductFrame.dart";
 
 class SpotlightViewFrame extends StatefulWidget {
   const SpotlightViewFrame({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class SpotlightViewFrame extends StatefulWidget {
 }
 
 class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
-  static const double tileHeight = 150;
+  static const double tileHeight = 240;
 
   //final List<RecalledProduct> testData = getTestData();
   late Future<List<RecalledProduct>?> _dbFuture;
@@ -22,6 +22,25 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   void initState() {
     super.initState();
     _dbFuture = ApiService().getProducts();
+  }
+
+  String? _titleFormatting(int index) {
+    String? title;
+
+    if (_db![index].title!.contains(" Due to ")) {
+      title = _db![index].title!.split(" Due to ")[0];
+      if (title.contains(" (Recall Alert)")) {
+        title = title.split(" (Recall Alert)")[0];
+      }
+    }
+
+    if (title == null) {
+      if (_db![index].title!.contains(" (Recall Alert)")) {
+        title = _db![index].title!.split(" (Recall Alert)")[0];
+      }
+    }
+
+    return title;
   }
 
   Widget _newRecallsText() {
@@ -88,6 +107,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                         _dbListViewImg(index),
                         Expanded(
                             child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             _dbListViewTitleText(index),
                             _dbListViewDescText(index)
@@ -104,7 +124,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
     return (_db!.isEmpty == false && _db![index].images != null)
         ? Padding(
             padding: const EdgeInsets.all(10),
-            child: flutterImage.Image.network(
+            child: flutter_image.Image.network(
               _db![index].images![0].url!,
               height: tileHeight,
               width: 120,
@@ -114,26 +134,46 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   }
 
   Widget _dbListViewTitleText(int index) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 10),
-      child: Text(
-        _db![index].title!,
-        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-        maxLines: 4,
-        overflow: TextOverflow.ellipsis,
+    String? title = _titleFormatting(index);
+
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 10),
+        child: Text(
+          (title != null) ? title : _db![index].title!,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 4,
+        ),
       ),
     );
   }
 
   Widget _dbListViewDescText(int index) {
+    String? dueTo;
+    if (_db![index].title!.contains(" Due to ")) {
+      dueTo = _db![index].title!.split(" Due to ")[1];
+      if (dueTo.contains(" (Recall Alert)")) {
+        dueTo = dueTo.split(" (Recall Alert)")[0];
+      }
+    }
+
     return Flexible(
         child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: Text(
-              _db![index].hazards![0].name!,
+            child: RichText(
+              text: TextSpan(children: <TextSpan>[
+                const TextSpan(
+                    text: "Hazard", style: TextStyle(color: Colors.grey)),
+                TextSpan(
+                  text: (dueTo != null) ? dueTo : _db![index].hazards![0].name!,
+                )
+              ]),
               overflow: TextOverflow.ellipsis,
-              maxLines: 4,
-            )));
+              maxLines: 3,
+            )
+            //Text((dueTo != null) ? dueTo : _db![index].hazards![0].name!)
+            ));
   }
 
   Widget _dbListViewArrow(int index) {

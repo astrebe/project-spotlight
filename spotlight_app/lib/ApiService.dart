@@ -12,7 +12,6 @@ class ApiService {
       var response = await http.get(url);
       if (response.statusCode == 200) {
         db = recalledProductFromJson(response.body);
-        log(db[0].toString());
       }
     } catch (e) {
       log(e.toString());

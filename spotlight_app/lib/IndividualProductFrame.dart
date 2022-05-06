@@ -30,7 +30,7 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
               padding: const EdgeInsets.all(8),
               children: [
                 if (widget.product.images != null) ...[
-                  Container(
+                  SizedBox(
                       height: 200,
                       child:
                           ListView(scrollDirection: Axis.horizontal, children: [
