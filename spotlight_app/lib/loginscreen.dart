@@ -264,6 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   _errorMessage = "Invalid Email";
                 }
               }
+              Navigator.of(context).pop();
             },
           ),
           Text(_errorMessage, style: TextStyle(color: Colors.red)),
