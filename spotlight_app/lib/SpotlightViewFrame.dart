@@ -3,6 +3,7 @@ import 'package:spotlight_app/ApiService.dart';
 import "RecalledProduct.dart";
 import 'package:flutter/src/widgets/image.dart' as flutter_image;
 import "IndividualProductFrame.dart";
+import 'DatabaseStorage.dart';
 
 class SpotlightViewFrame extends StatefulWidget {
   const SpotlightViewFrame({Key? key}) : super(key: key);
@@ -17,11 +18,19 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   //final List<RecalledProduct> testData = getTestData();
   late Future<List<RecalledProduct>?> _dbFuture;
   late List<RecalledProduct>? _db = [];
-
+  
   @override
   void initState() {
     super.initState();
-    _dbFuture = ApiService().getProducts();
+    _dbFuture = _grabFromCacheOrApi();
+  }
+
+  Future<List<RecalledProduct>?> _grabFromCacheOrApi() async {
+    if (await DatabaseStorage().dbCacheExists()) {
+      return DatabaseStorage().readFileIfUpdated();
+    } else {
+      return ApiService().getProducts();
+    }
   }
 
   String? _titleFormatting(int index) {
