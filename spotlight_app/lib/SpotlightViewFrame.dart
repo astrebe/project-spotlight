@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:spotlight_app/ApiService.dart';
-import "RecalledProduct.dart";
+import 'RecalledProductDatabase.dart';
 import 'package:flutter/src/widgets/image.dart' as flutter_image;
 import "IndividualProductFrame.dart";
 import 'DatabaseStorage.dart';
@@ -16,8 +16,10 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   static const double tileHeight = 240;
 
   //final List<RecalledProduct> testData = getTestData();
-  late Future<List<RecalledProduct>?> _dbFuture;
-  late List<RecalledProduct>? _db = [];
+  // late Future<List<RecalledProduct>?> _dbFuture;
+  // late List<RecalledProduct>? _db = [];
+  late Future<RecalledProductDB> _dbFuture;
+  late RecalledProductDB? _db = RecalledProductDB();
   
   @override
   void initState() {
@@ -25,7 +27,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
     _dbFuture = _grabFromCacheOrApi();
   }
 
-  Future<List<RecalledProduct>?> _grabFromCacheOrApi() async {
+  Future<RecalledProductDB> _grabFromCacheOrApi() async {
     if (await DatabaseStorage().dbCacheExists()) {
       return DatabaseStorage().readFileIfUpdated();
     } else {
@@ -36,16 +38,16 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   String? _titleFormatting(int index) {
     String? title;
 
-    if (_db![index].title!.contains(" Due to ")) {
-      title = _db![index].title!.split(" Due to ")[0];
-      if (title.contains(" (Recall Alert)")) {
+    if (_db?.prodList[index].title!.contains(" Due to ")) {
+      title = _db?.prodList[index].title!.split(" Due to ")[0];
+      if (title!.contains(" (Recall Alert)")) {
         title = title.split(" (Recall Alert)")[0];
       }
     }
 
     if (title == null) {
-      if (_db![index].title!.contains(" (Recall Alert)")) {
-        title = _db![index].title!.split(" (Recall Alert)")[0];
+      if (_db?.prodList[index].title!.contains(" (Recall Alert)")) {
+        title = _db?.prodList[index].title!.split(" (Recall Alert)")[0];
       }
     }
 
@@ -130,11 +132,11 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   }
 
   Widget _dbListViewImg(int index) {
-    return (_db!.isEmpty == false && _db![index].images != null)
+    return (_db?.prodList.isEmpty == false && _db?.prodList[index].images != null)
         ? Padding(
             padding: const EdgeInsets.all(10),
             child: flutter_image.Image.network(
-              _db![index].images![0].url!,
+              _db?.prodList[index].images![0].url!,
               height: tileHeight,
               width: 120,
             ),
@@ -149,7 +151,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       child: Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
-          (title != null) ? title : _db![index].title!,
+          (title != null) ? title : _db?.prodList[index].title!,
           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           overflow: TextOverflow.ellipsis,
           maxLines: 4,
@@ -160,9 +162,9 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
 
   Widget _dbListViewDescText(int index) {
     String? dueTo;
-    if (_db![index].title!.contains(" Due to ")) {
-      dueTo = _db![index].title!.split(" Due to ")[1];
-      if (dueTo.contains(" (Recall Alert)")) {
+    if (_db?.prodList[index].title!.contains(" Due to ")) {
+      dueTo = _db?.prodList[index].title!.split(" Due to ")[1];
+      if (dueTo!.contains(" (Recall Alert)")) {
         dueTo = dueTo.split(" (Recall Alert)")[0];
       }
     }
@@ -175,13 +177,13 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                 const TextSpan(
                     text: "Hazard", style: TextStyle(color: Colors.grey)),
                 TextSpan(
-                  text: (dueTo != null) ? dueTo : _db![index].hazards![0].name!,
+                  text: (dueTo != null) ? dueTo : _db?.prodList[index].hazards![0].name!,
                 )
               ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             )
-            //Text((dueTo != null) ? dueTo : _db![index].hazards![0].name!)
+            //Text((dueTo != null) ? dueTo : _db.prodList[index].hazards![0].name!)
             ));
   }
 
@@ -201,7 +203,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            IndividualProductFrame(_db![index])));
+                            IndividualProductFrame(_db?.prodList[index])));
               }),
         ],
       ),
@@ -233,7 +235,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<RecalledProduct>?>(
+    return FutureBuilder<RecalledProductDB?>(
         future: _dbFuture,
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {

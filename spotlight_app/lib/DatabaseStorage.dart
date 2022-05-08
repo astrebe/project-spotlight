@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'RecalledProduct.dart';
+import 'RecalledProductDatabase.dart';
 import 'ApiService.dart';
 
 import 'package:path_provider/path_provider.dart';
@@ -33,8 +33,9 @@ class DatabaseStorage {
     return file.writeAsString(db, mode: FileMode.append);
   }
 
-  Future<List<RecalledProduct>?> fetchOnlineAndWriteDatabaseCache() async {
-    List<RecalledProduct>? _db = <RecalledProduct>[];
+  Future<RecalledProductDB> fetchOnlineAndWriteDatabaseCache() async {
+    //List<RecalledProduct>? _db = <RecalledProduct>[];
+    RecalledProductDB _db = RecalledProductDB();
     _db = await ApiService().getProducts();
 
     return _db;
@@ -42,15 +43,17 @@ class DatabaseStorage {
 
   //Read the file if the file's date is not a week old. Should anything go wrong
   //with reading the file, it will just fetch it from online.
-  Future<List<RecalledProduct>?> readFileIfUpdated() async {
-    List<RecalledProduct>? _db = <RecalledProduct>[];
+  Future<RecalledProductDB> readFileIfUpdated() async {
+    //List<RecalledProduct>? _db = <RecalledProduct>[];
+    RecalledProductDB _db = RecalledProductDB();
     try {
       final cache = await _localFile;
       final contents = await cache.readAsString();
       final DateTime lastModified = await cache.lastModified();
 
       if(_mostRecentSunday(DateTime.now()).isAtSameMomentAs(_mostRecentSunday(lastModified))){
-        _db = recalledProductFromJson(contents);
+        _db.recalledProductDBFromJson(contents);
+        //recalledProductFromJson(contents);
         return _db;
       } else {
         return fetchOnlineAndWriteDatabaseCache();

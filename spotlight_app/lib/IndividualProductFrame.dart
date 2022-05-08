@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "RecalledProduct.dart";
+import 'RecalledProductDatabase.dart';
 import 'dart:ui';
 import 'package:flutter/src/widgets/image.dart' as flutterImage;
 

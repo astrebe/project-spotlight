@@ -13,6 +13,32 @@ List<RecalledProduct> recalledProductFromJson(String str) =>
 String recalledProductToJson(List<RecalledProduct> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+class RecalledProductDB {
+  List<RecalledProduct> _db = [];
+  List<String?> uniqueCategories = [];
+  List<String?> uniqueHazards = [];
+
+  recalledProductDBFromJson(String str) {
+    _db = recalledProductFromJson(str);
+
+    var cats = Set<String?>();
+    var hazs = Set<String?>();
+    //List<RecalledProduct>? test = db?.where((product) => product.hazards?.forEach((hazard) {cats.add(hazard.name) })).toList();
+    for (var i = 0; i < _db.length; i++) {
+      _db[i].hazards?.forEach((hazard) {hazs.add(hazard.name); });
+      _db[i].products?.forEach((product) {cats.add(product.type); });
+    }
+    uniqueCategories = cats.toList();
+    uniqueHazards = hazs.toList();
+  }
+
+  get prodList => _db;
+  get categories => uniqueCategories;
+  get hazards => uniqueHazards;
+  
+}
+
+
 class RecalledProduct {
   RecalledProduct({
     this.recallId,

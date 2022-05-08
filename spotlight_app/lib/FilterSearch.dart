@@ -1,4 +1,4 @@
-import 'RecalledProduct.dart';
+import 'RecalledProductDatabase.dart';
 
 /* This class will behave a bit differently once a database is linked 
 as it will be mostly constructing queries to send out rather than parsing.

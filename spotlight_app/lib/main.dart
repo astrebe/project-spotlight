@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotlight_app/RecalledProduct.dart';
+import 'package:spotlight_app/RecalledProductDatabase.dart';
 import 'package:spotlight_app/SpotlightFilterView.dart';
 import 'SpotlightViewFrame.dart';
 
