@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'LoginScreen.dart';
+import 'userSettings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primaryColor: const Color.fromARGB(255, 153, 0, 0),
+        primaryColor:Color.fromARGB(255, 153, 0, 0),
       ),
       home: const MyHomePage(title: 'SpotLight Login Screen'),
     );
@@ -64,7 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomInset: false,
-      body: const LoginScreen(),
+      body: const UserSettings(), //TO TEST USER SETTINGS ONLY!!!
     );
   }
 }
+
