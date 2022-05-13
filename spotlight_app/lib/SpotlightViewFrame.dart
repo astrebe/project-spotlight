@@ -13,14 +13,14 @@ class SpotlightViewFrame extends StatefulWidget {
 }
 
 class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
-  static const double tileHeight = 240;
+  static const double tileHeight = 200;
 
   //final List<RecalledProduct> testData = getTestData();
   // late Future<List<RecalledProduct>?> _dbFuture;
   // late List<RecalledProduct>? _db = [];
   late Future<RecalledProductDB> _dbFuture;
   late RecalledProductDB? _db = RecalledProductDB();
-  
+
   @override
   void initState() {
     super.initState();
@@ -132,7 +132,8 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   }
 
   Widget _dbListViewImg(int index) {
-    return (_db?.prodList.isEmpty == false && _db?.prodList[index].images != null)
+    return (_db?.prodList.isEmpty == false &&
+            _db?.prodList[index].images != null)
         ? Padding(
             padding: const EdgeInsets.all(10),
             child: flutter_image.Image.network(
@@ -169,17 +170,26 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       }
     }
 
+    if (dueTo != null && dueTo.contains("; ")) {
+      dueTo = dueTo.split("; ")[0];
+    }
+
     return Flexible(
         child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: RichText(
-              text: TextSpan(children: <TextSpan>[
-                const TextSpan(
-                    text: "Hazard", style: TextStyle(color: Colors.grey)),
-                TextSpan(
-                  text: (dueTo != null) ? dueTo : _db?.prodList[index].hazards![0].name!,
-                )
-              ]),
+              text: TextSpan(
+                  style: const TextStyle(color: Colors.grey),
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: "Due to: ",
+                    ),
+                    TextSpan(
+                      text: (dueTo != null)
+                          ? dueTo
+                          : _db?.prodList[index].hazards![0].name!,
+                    )
+                  ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             )
