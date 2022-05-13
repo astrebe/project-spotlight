@@ -34,7 +34,6 @@ class DatabaseStorage {
   }
 
   Future<RecalledProductDB> fetchOnlineAndWriteDatabaseCache() async {
-    //List<RecalledProduct>? _db = <RecalledProduct>[];
     RecalledProductDB _db = RecalledProductDB();
     _db = await ApiService().getProducts();
 
@@ -44,7 +43,6 @@ class DatabaseStorage {
   //Read the file if the file's date is not a week old. Should anything go wrong
   //with reading the file, it will just fetch it from online.
   Future<RecalledProductDB> readFileIfUpdated() async {
-    //List<RecalledProduct>? _db = <RecalledProduct>[];
     RecalledProductDB _db = RecalledProductDB();
     try {
       final cache = await _localFile;
@@ -53,7 +51,6 @@ class DatabaseStorage {
 
       if(_mostRecentSunday(DateTime.now()).isAtSameMomentAs(_mostRecentSunday(lastModified))){
         _db.recalledProductDBFromJson(contents);
-        //recalledProductFromJson(contents);
         return _db;
       } else {
         return fetchOnlineAndWriteDatabaseCache();
@@ -61,9 +58,7 @@ class DatabaseStorage {
         
     } catch (e) {
       log("$e");
-      // If encountering an error, throw empty 
       return fetchOnlineAndWriteDatabaseCache();
     }
   } 
 }
-

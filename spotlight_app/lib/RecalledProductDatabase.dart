@@ -15,21 +15,26 @@ String recalledProductToJson(List<RecalledProduct> data) =>
 
 class RecalledProductDB {
   List<RecalledProduct> _db = [];
-  List<String?> uniqueCategories = [];
-  List<String?> uniqueHazards = [];
+  List<String> uniqueCategories = [];
+  List<String> uniqueHazards = [];
 
   recalledProductDBFromJson(String str) {
     _db = recalledProductFromJson(str);
 
-    var cats = Set<String?>();
-    var hazs = Set<String?>();
+    var cats = <String>{"-"};
+    var hazs = <String>{"-"};
     //List<RecalledProduct>? test = db?.where((product) => product.hazards?.forEach((hazard) {cats.add(hazard.name) })).toList();
     for (var i = 0; i < _db.length; i++) {
-      _db[i].hazards?.forEach((hazard) {hazs.add(hazard.name); });
-      _db[i].products?.forEach((product) {cats.add(product.type); });
+      _db[i].hazards?.forEach((hazard) {hazard.hazardType != null ? hazs.add(hazard.hazardType!) : null; });
+      _db[i].products?.forEach((product) {product.type != null ? cats.add(product.type!) : null; });
     }
     uniqueCategories = cats.toList();
     uniqueHazards = hazs.toList();
+
+    uniqueCategories.sort();
+    uniqueHazards.sort();
+
+    uniqueCategories.removeAt(0); //Removes an empty string.
   }
 
   get prodList => _db;

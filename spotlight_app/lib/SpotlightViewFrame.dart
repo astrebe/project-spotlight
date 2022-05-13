@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:spotlight_app/ApiService.dart';
+import 'package:spotlight_app/SpotlightFilterView.dart';
 import 'RecalledProductDatabase.dart';
 import 'package:flutter/src/widgets/image.dart' as flutter_image;
 import "IndividualProductFrame.dart";
@@ -70,7 +71,9 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       width: 130,
       child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, "/filter");
+            //Navigator.pushNamed(context, "/filter");
+            Navigator.push(context, MaterialPageRoute(builder: (context) => 
+            SpotlightFilterView(hazards: _db!.uniqueHazards, categories: _db!.uniqueCategories,)));
           },
           child: Row(children: const <Widget>[
             Padding(

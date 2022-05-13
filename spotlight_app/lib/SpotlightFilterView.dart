@@ -1,13 +1,37 @@
 import "package:flutter/material.dart";
 
 class SpotlightFilterView extends StatefulWidget {
-  const SpotlightFilterView({Key? key}) : super(key: key);
+  const SpotlightFilterView({Key? key, required this.hazards, required this.categories}) : super(key: key);
+
+  final List<String> hazards;
+  final List<String> categories;
+
+  
 
   @override
   _SpotlightfilterviewState createState() => _SpotlightfilterviewState();
 }
 
 class _SpotlightfilterviewState extends State<SpotlightFilterView> {
+
+
+  //Because the government database seemingly no longer tracks the actual value of hazards these
+  //are the hard coded search options on their website. Hazards is still calculated in the DB
+  //in case they ever add it back?
+
+  List<String> hazardsHardCoded = [
+    "-", "Chemical Burn", "Chemical Ingestion", "Electrocution", "Heat-Related Explosion", 
+    "Smoke Inhalation", "Chemical Explosion", "Electrical Smoke", "Checmical Fire", 
+    "Electrical Shock", "Electrical Burn", "Electrical Overheating", "Other Heavy Metals", 
+    "Electrical Fire", "Pain", "Poisoning", "Pinching", "Physical", "Lead", "Impact", 
+    "Heat-Related", "Ingestion", "Injury", "Inhalation", "Projectile", "Scalding", "Tip Over", 
+    "Suffocation", "Friction Burn", "Safety Equipment Malfunction", "Shorting", "Sparking", "Struck by", 
+    "Roll Over", "Falling", "Choking", "Chemical", "Collapse", "Collision", "Crash", "Concussions", 
+    "Carbon Monoxide", "Cadminium Poisoning", "Arcing", "Amputation", "Asphyxiation", "Aspiration", 
+    "Burn", "Bruising", "Crushing", "Cuts", "Entaglement", "Entrapment", "Explosion", 
+    "Fire", "Allergic Reaction", "Ejection", "Drowning", "Electrical", "Flame-Retardant Chemicals"
+  ];
+
   var keyText = "";
   var manText = "";
   var distText = "";
@@ -15,7 +39,6 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
   var catVal = "-";
   var startInteracted = false;
   var endInteracted = false;
-
   DateTime selectedDateStart = DateTime.now();
   DateTime selectedDateEnd = DateTime.now();
 
@@ -102,6 +125,8 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
   }
 
   Widget _dropDownSearch(String label, List<String> list, int formNum) {
+    hazardsHardCoded.sort();
+
     if (formNum != 2 && formNum != 3) {
       throw "_dropDownSearch: Invalid Form Num Passed.";
     }
@@ -260,16 +285,18 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                     children: <Widget>[
                       _dropDownSearch(
                           "Hazard Type",
-                          <String>[
-                            '-',
-                            'Exploding',
-                            "Chemical Burns",
-                            'Falling'
-                          ],
+                          // <String>[
+                          //   '-',
+                          //   'Exploding',
+                          //   "Chemical Burns",
+                          //   'Falling'
+                          // ],
+                          hazardsHardCoded,
                           2),
                       _dropDownSearch(
                           "Category",
-                          <String>['-', 'Baby Carriers', "Furniture", 'Toys'],
+                          //<String>['-', 'Baby Carriers', "Furniture", 'Toys'],
+                          widget.categories,
                           3)
                     ],
                   ),

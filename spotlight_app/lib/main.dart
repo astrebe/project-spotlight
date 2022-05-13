@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         "/": (context) => const MyHomePage(),
         "/SpotlightView": (context) => const SpotlightViewFrame(),
-        "/filter": (context) => const SpotlightFilterView(),
+        //"/filter": (context) => const SpotlightFilterView(),
       },
       initialRoute: "/",
     );
