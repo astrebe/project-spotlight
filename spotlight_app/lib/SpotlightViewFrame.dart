@@ -33,8 +33,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   Future<RecalledProductDB> _grabFromCacheOrApi() async {
     if (widget.dbURL != null) {
       return ApiService().getProductsFromURL(widget.dbURL!);
-    }
-    else if (await DatabaseStorage().dbCacheExists()) {
+    } else if (await DatabaseStorage().dbCacheExists()) {
       return DatabaseStorage().readFileIfUpdated();
     } else {
       return ApiService().getProducts();
@@ -77,8 +76,13 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       child: ElevatedButton(
           onPressed: () {
             //Navigator.pushNamed(context, "/filter");
-            Navigator.push(context, MaterialPageRoute(builder: (context) => 
-            SpotlightFilterView(hazards: _db!.uniqueHazards, categories: _db!.uniqueCategories,)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SpotlightFilterView(
+                          hazards: _db!.uniqueHazards,
+                          categories: _db!.uniqueCategories,
+                        )));
           },
           child: Row(children: const <Widget>[
             Padding(
