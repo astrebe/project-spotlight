@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:spotlight_app/SpotlightViewFrame.dart';
 
 class SpotlightFilterView extends StatefulWidget {
   const SpotlightFilterView({Key? key, required this.hazards, required this.categories}) : super(key: key);
@@ -14,6 +15,7 @@ class SpotlightFilterView extends StatefulWidget {
 
 class _SpotlightfilterviewState extends State<SpotlightFilterView> {
 
+  final filterFormKey = GlobalKey<FormState>();
 
   //Because the government database seemingly no longer tracks the actual value of hazards these
   //are the hard coded search options on their website. Hazards is still calculated in the DB
@@ -34,15 +36,23 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
 
   var keyText = "";
   var manText = "";
-  var distText = "";
+  var retText = "";
   var hazVal = "-";
   var catVal = "-";
   var startInteracted = false;
   var endInteracted = false;
-  DateTime selectedDateStart = DateTime.now();
-  DateTime selectedDateEnd = DateTime.now();
+  DateTime now = DateTime.now();
+  DateTime selectedDateStart = DateTime.now();  
+  DateTime selectedDateEnd = DateTime.now(); 
 
   Color mainColor = const Color.fromARGB(255, 153, 0, 0);
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDateStart = DateTime(now.year, now.month, now.day);
+    selectedDateEnd = DateTime(now.year, now.month, now.day);
+  }
 
   Future<void> _selectDate(BuildContext context, int formNum) async {
     final DateTime? picked = await showDatePicker(
@@ -85,7 +95,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
       } else if (form == 6) {
         manText = value;
       } else if (form == 7) {
-        distText = value;
+        retText = value;
       } else {
         throw Exception("Form Number not Found");
       }
@@ -118,7 +128,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
           //border: UnderlineInputBorder(),
           labelText: 'Keyword Search',
           labelStyle: const TextStyle(color: Color.fromARGB(255, 77, 77, 77)),
-          hintText: 'Keywords',
+          hintText: 'Keywords in Title',
         ),
       ),
     );
@@ -260,11 +270,70 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
             Icon(Icons.search),
             Text("Search"),
           ]),
-          onPressed: () {},
+          onPressed: () {
+            //TODO: Validate Data
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SpotlightViewFrame(dbURL: _createURLExtension(),)));
+          },
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(mainColor)),
         ));
   }
+
+  String _createURLExtension() {
+    DateTime curDate = DateTime(now.year, now.month, now.day);
+    String url = "";
+
+    if(keyText != "") {
+      url += "&RecallTitle=$keyText";
+    }
+    if (manText != "") {
+      url+= "&Manufacturer=$manText";
+    }
+    if (retText != "") {
+      url+= "&Retailer=$retText";
+    }
+    if(selectedDateStart != curDate) {
+      url+= "&RecallDateStart=${selectedDateStart.year}-${selectedDateStart.month}-${selectedDateStart.day}";
+    }
+    if(selectedDateEnd != curDate) {
+      url+= "&RecallDateEnd=${selectedDateEnd.year}-${selectedDateEnd.month}-${selectedDateEnd.day}";
+    }
+    if(hazVal != "-") {
+      url+="&HazardType=$hazVal";
+    }
+    if(catVal != "-") {
+      url+="ProductType=$catVal";
+    }
+
+    print(url);
+    return url;
+  }
+
+  Widget _clearButton() {
+    return Container(
+      margin: const EdgeInsets.only(right: 50, top: 10),
+      padding: const EdgeInsets.all(8),
+      width: 150,
+      child: ElevatedButton(
+      onPressed: () {
+        setState(() {
+          filterFormKey.currentState!.reset();
+          keyText = "";
+        manText = "";
+        retText = "";
+        hazVal = "-";
+        catVal = "-";
+        startInteracted = false;
+        endInteracted = false;
+        selectedDateStart = DateTime.now();
+        selectedDateEnd = DateTime.now();
+        });
+      }, 
+      child: Text("Clear"),
+      style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(mainColor)),),
+    );
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +344,10 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
               backgroundColor: mainColor,
               title: const Text("Filter Results"),
             ),
-            body: Container(
+            body: 
+            Form (
+              key: filterFormKey,
+              child:Container(
                 color: Colors.grey.shade200,
                 height: double.maxFinite,
                 child: SingleChildScrollView(
@@ -285,17 +357,10 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                     children: <Widget>[
                       _dropDownSearch(
                           "Hazard Type",
-                          // <String>[
-                          //   '-',
-                          //   'Exploding',
-                          //   "Chemical Burns",
-                          //   'Falling'
-                          // ],
                           hazardsHardCoded,
                           2),
                       _dropDownSearch(
                           "Category",
-                          //<String>['-', 'Baby Carriers', "Furniture", 'Toys'],
                           widget.categories,
                           3)
                     ],
@@ -307,13 +372,16 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
                   Row(
                     children: <Widget>[
                       _businessKeySearch("Manufacturer", 6),
-                      _businessKeySearch("Distributor", 7),
+                      _businessKeySearch("Retailer", 7),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[_searchButton()],
+                    children: <Widget>[_clearButton(), _searchButton(), ],
                   )
-                ])))));
+                ]))),
+              )
+          )
+    );
   }
 }

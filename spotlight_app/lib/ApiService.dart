@@ -20,4 +20,18 @@ class ApiService {
     }
     return db;
   }
+
+  Future<RecalledProductDB> getProductsFromURL(String uri) async {
+    RecalledProductDB db = RecalledProductDB();
+    try {
+      var url = Uri.parse(ApiConstants.baseUrl+uri);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        db.recalledProductDBFromJson(response.body);
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return db;
+  }
 }

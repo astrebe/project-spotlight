@@ -40,6 +40,8 @@ class RecalledProductDB {
   get prodList => _db;
   get categories => uniqueCategories;
   get hazards => uniqueHazards;
+
+  get length => _db.length;
   
 }
 

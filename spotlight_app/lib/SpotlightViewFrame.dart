@@ -7,7 +7,9 @@ import "IndividualProductFrame.dart";
 import 'DatabaseStorage.dart';
 
 class SpotlightViewFrame extends StatefulWidget {
-  const SpotlightViewFrame({Key? key}) : super(key: key);
+  const SpotlightViewFrame({Key? key, this.dbURL}) : super(key: key);
+
+  final String? dbURL;
 
   @override
   _SpotlightViewFrameState createState() => _SpotlightViewFrameState();
@@ -29,7 +31,10 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   }
 
   Future<RecalledProductDB> _grabFromCacheOrApi() async {
-    if (await DatabaseStorage().dbCacheExists()) {
+    if (widget.dbURL != null) {
+      return ApiService().getProductsFromURL(widget.dbURL!);
+    }
+    else if (await DatabaseStorage().dbCacheExists()) {
       return DatabaseStorage().readFileIfUpdated();
     } else {
       return ApiService().getProducts();
@@ -254,7 +259,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               _db = snapshot.data;
-              if (_db != null) {
+              if (_db!.length != 0) {
                 return _viewFrame();
               } else {
                 return Container(width: 60, height: 60, color: Colors.black);
