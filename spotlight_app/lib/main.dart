@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primaryColor:Color.fromARGB(255, 153, 0, 0),
+        primaryColor: Color.fromARGB(255, 153, 0, 0),
       ),
       home: const MyHomePage(title: 'SpotLight Login Screen'),
     );
@@ -65,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomInset: false,
-      body: const UserSettings(), //TO TEST USER SETTINGS ONLY!!!
+      body: UserSettings(), //TO TEST USER SETTINGS ONLY!!!
     );
   }
 }
-

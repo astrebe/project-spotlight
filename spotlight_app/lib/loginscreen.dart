@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import "package:firebase_auth/firebase_auth.dart";
+import 'userSettings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -191,6 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
                       onPressed: () {
+                    
                         NoAccountPopUp(context);
                       },
                     ),
