@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomInset: false,
-      body: UserSettings(), //TO TEST USER SETTINGS ONLY!!!
+      body: LoginScreen(), //TO TEST USER SETTINGS ONLY!!!
     );
   }
 }

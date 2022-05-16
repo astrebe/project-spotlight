@@ -30,10 +30,10 @@ class _UserSettingsState extends State<UserSettings> {
         children: <Widget>[
           Align(
             child: Text(
-              "User Settings",
+              "User Preferences",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 48,
+                  fontSize: 42,
                   fontStyle: FontStyle.italic),
               textAlign: TextAlign.center,
             ),
