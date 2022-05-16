@@ -103,13 +103,13 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   }
 
   Widget _dbListView() {
-    return ListView.separated(
-        separatorBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 8,
-          );
-        },
-        itemCount: 10, //TODO: Change to how long list is
+    return ListView.builder(
+        // separatorBuilder: (BuildContext context, int index) {
+        //   return Container(
+        //     height: 8,
+        //   );
+        // },
+        itemCount: _db?.prodList.length, 
         itemBuilder: (context, index) {
           return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),

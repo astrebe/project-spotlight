@@ -271,7 +271,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
             Text("Search"),
           ]),
           onPressed: () {
-            //TODO: Validate Data
+            //TODO: Validate Data 
             Navigator.push(context, MaterialPageRoute(builder: (context) => SpotlightViewFrame(dbURL: _createURLExtension(),)));
           },
           style: ButtonStyle(
@@ -283,29 +283,29 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
     DateTime curDate = DateTime(now.year, now.month, now.day);
     String url = "";
 
-    if(keyText != "") {
+    if (keyText != "") {
       url += "&RecallTitle=$keyText";
     }
     if (manText != "") {
-      url+= "&Manufacturer=$manText";
+      url += "&Manufacturer=$manText";
     }
     if (retText != "") {
-      url+= "&Retailer=$retText";
+      url += "&Retailer=$retText";
     }
-    if(selectedDateStart != curDate) {
-      url+= "&RecallDateStart=${selectedDateStart.year}-${selectedDateStart.month}-${selectedDateStart.day}";
+    if (selectedDateStart != curDate) {
+      url += "&RecallDateStart=${selectedDateStart.year}-${selectedDateStart.month}-${selectedDateStart.day}";
     }
-    if(selectedDateEnd != curDate) {
-      url+= "&RecallDateEnd=${selectedDateEnd.year}-${selectedDateEnd.month}-${selectedDateEnd.day}";
+    if (selectedDateEnd != curDate) {
+      url += "&RecallDateEnd=${selectedDateEnd.year}-${selectedDateEnd.month}-${selectedDateEnd.day}";
     }
-    if(hazVal != "-") {
-      url+="&HazardType=$hazVal";
+    if (hazVal != "-") {
+      url += "&HazardType=$hazVal";
     }
-    if(catVal != "-") {
-      url+="ProductType=$catVal";
+    if (catVal != "-") {
+      url += "ProductType=$catVal";
     }
 
-    print(url);
+    debugPrint(url);
     return url;
   }
 
@@ -329,7 +329,7 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
         selectedDateEnd = DateTime.now();
         });
       }, 
-      child: Text("Clear"),
+      child: const Text("Clear"),
       style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(mainColor)),),
     );

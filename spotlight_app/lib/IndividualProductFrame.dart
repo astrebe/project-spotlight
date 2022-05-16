@@ -113,7 +113,7 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                   const Text("Contact information not provided")
                 ],
                 if (widget.product.retailers != null) ...[
-                  const Text("Units: ",
+                  const Text("Retailers: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
                   for (var i = 0; i < widget.product.retailers!.length; i++)
