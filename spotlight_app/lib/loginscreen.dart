@@ -259,7 +259,12 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             child: const Text("Proceed"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SpotlightViewFrame()));
+            },
           ),
         ],
       ),
