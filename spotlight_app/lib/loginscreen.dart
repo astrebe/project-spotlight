@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import "package:firebase_auth/firebase_auth.dart";
+import 'SpotlightViewFrame.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -143,11 +144,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .signInWithEmailAndPassword(
                                     email: _loginEmail,
                                     password: _loginPassword);
-                            /*Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Put Page Name Here));
-                                */
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SpotlightViewFrame()));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == "user-not-fount") {
                               _errorMessage = "No User Found for that Email.";
