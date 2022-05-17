@@ -265,7 +265,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
           child: const CircularProgressIndicator(
             backgroundColor: Colors.grey,
             color: Color.fromARGB(255, 153, 0, 0),
-            value: 0.8,
+            //value: 0.8,
           )
         ));
           }
@@ -294,7 +294,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
           child: const CircularProgressIndicator(
             backgroundColor: Colors.grey,
             color: Color.fromARGB(255, 153, 0, 0),
-            value: 0.8,
+            //value: 0.8,
           )
         ));
           }
