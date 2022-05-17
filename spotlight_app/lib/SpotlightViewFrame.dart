@@ -252,6 +252,23 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
     return FutureBuilder<RecalledProductDB?>(
         future: _dbFuture,
         builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 153, 0, 0),
+          title: widget.barTitle == null ? const Text("All Recall Products") : Text(widget.barTitle!),
+        ),
+        backgroundColor: Colors.grey.shade200,
+        body: Container(
+          alignment: Alignment.topCenter,
+          margin: const EdgeInsets.only(top: 20),
+          child: const CircularProgressIndicator(
+            backgroundColor: Colors.grey,
+            color: Color.fromARGB(255, 153, 0, 0),
+            value: 0.8,
+          )
+        ));
+          }
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               _db = snapshot.data;
