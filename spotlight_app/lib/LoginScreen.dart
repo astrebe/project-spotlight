@@ -324,6 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
         title: const Text('New Account'),
         content: const Text(
             "Create a new account using a new email and strong password."),
