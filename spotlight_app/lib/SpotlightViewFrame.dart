@@ -7,9 +7,11 @@ import "IndividualProductFrame.dart";
 import 'DatabaseStorage.dart';
 
 class SpotlightViewFrame extends StatefulWidget {
-  const SpotlightViewFrame({Key? key, this.dbURL}) : super(key: key);
+  const SpotlightViewFrame({Key? key, this.dbURL, this.barTitle})
+      : super(key: key);
 
   final String? dbURL;
+  final String? barTitle;
 
   @override
   _SpotlightViewFrameState createState() => _SpotlightViewFrameState();
@@ -109,7 +111,7 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
         //     height: 8,
         //   );
         // },
-        itemCount: _db?.prodList.length, 
+        itemCount: _db?.prodList.length,
         itemBuilder: (context, index) {
           return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -232,11 +234,11 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
     );
   }
 
-  Widget _viewFrame() {
+  Widget _viewFrame(bool data) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 153, 0, 0),
-          title: const Text("All Recall Products"),
+          title: widget.barTitle == null ? const Text("All Recall Products") : Text(widget.barTitle!),
         ),
         backgroundColor: Colors.grey.shade200,
         body: Column(
@@ -250,7 +252,8 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
             ),
             Expanded(
                 //TODO: https://api.flutter.dev/flutter/widgets/SliverChildBuilderDelegate-class.html <- Efficient use of display list use once Database
-                child: _dbListView()),
+                child: data ? _dbListView() : const Text("No results")
+            ),
           ],
         ));
   }
@@ -264,9 +267,9 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
             if (snapshot.hasData) {
               _db = snapshot.data;
               if (_db!.length != 0) {
-                return _viewFrame();
+                return _viewFrame(true);
               } else {
-                return Container(width: 60, height: 60, color: Colors.black);
+                return _viewFrame(false);
               }
             } else {
               return Container(width: 60, height: 60, color: Colors.black);
