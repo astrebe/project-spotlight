@@ -275,7 +275,8 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
           alignment: Alignment.topCenter,
           margin: const EdgeInsets.only(top: 20),
           child: const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 153, 0, 0)),
+            backgroundColor: Colors.grey,
+            color: Color.fromARGB(255, 153, 0, 0),
             value: 0.8,
           )
         ));
