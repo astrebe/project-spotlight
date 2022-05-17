@@ -20,9 +20,6 @@ class SpotlightViewFrame extends StatefulWidget {
 class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
   static const double tileHeight = 200;
 
-  //final List<RecalledProduct> testData = getTestData();
-  // late Future<List<RecalledProduct>?> _dbFuture;
-  // late List<RecalledProduct>? _db = [];
   late Future<RecalledProductDB> _dbFuture;
   late RecalledProductDB? _db = RecalledProductDB();
 
@@ -77,7 +74,6 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
       width: 130,
       child: ElevatedButton(
           onPressed: () {
-            //Navigator.pushNamed(context, "/filter");
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -106,11 +102,6 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
 
   Widget _dbListView() {
     return ListView.builder(
-        // separatorBuilder: (BuildContext context, int index) {
-        //   return Container(
-        //     height: 8,
-        //   );
-        // },
         itemCount: _db?.prodList.length,
         itemBuilder: (context, index) {
           return Padding(
@@ -207,7 +198,6 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             )
-            //Text((dueTo != null) ? dueTo : _db.prodList[index].hazards![0].name!)
             ));
   }
 
@@ -251,7 +241,6 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
               ],
             ),
             Expanded(
-                //TODO: https://api.flutter.dev/flutter/widgets/SliverChildBuilderDelegate-class.html <- Efficient use of display list use once Database
                 child: data ? _dbListView() : const Text("No results")
             ),
           ],
@@ -275,14 +264,21 @@ class _SpotlightViewFrameState extends State<SpotlightViewFrame> {
               return Container(width: 60, height: 60, color: Colors.black);
             }
           }
-
-          //elseif(snapshot.hasError){}
           else {
-            return const SizedBox(
-              width: 60,
-              height: 60,
-              child: CircularProgressIndicator(),
-            );
+            return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 153, 0, 0),
+          title: widget.barTitle == null ? const Text("All Recall Products") : Text(widget.barTitle!),
+        ),
+        backgroundColor: Colors.grey.shade200,
+        body: Container(
+          alignment: Alignment.topCenter,
+          margin: EdgeInsets.only(top: 20),
+          child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 153, 0, 0)),
+            value: 0.8,
+          )
+        ));
           }
         });
   }

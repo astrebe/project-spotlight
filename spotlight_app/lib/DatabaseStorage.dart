@@ -29,7 +29,6 @@ class DatabaseStorage {
   Future<File> writeDatabaseCache(String db) async {
     final file = await _localFile;
 
-    // Write the file
     return file.writeAsString(db, mode: FileMode.append);
   }
 
@@ -40,8 +39,6 @@ class DatabaseStorage {
     return _db;
   }
 
-  //Read the file if the file's date is not a week old. Should anything go wrong
-  //with reading the file, it will just fetch it from online.
   Future<RecalledProductDB> readFileIfUpdated() async {
     RecalledProductDB _db = RecalledProductDB();
     try {

@@ -271,7 +271,6 @@ class _SpotlightfilterviewState extends State<SpotlightFilterView> {
             Text("Search"),
           ]),
           onPressed: () {
-            //TODO: Validate Data 
             Navigator.push(context, MaterialPageRoute(builder: (context) => SpotlightViewFrame(dbURL: _createURLExtension(), barTitle: "Search Results")));
           },
           style: ButtonStyle(

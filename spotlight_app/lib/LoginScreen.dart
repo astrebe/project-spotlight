@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import 'SpotlightViewFrame.dart';
+import 'userSettings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
         padding: const EdgeInsets.all(25.0),
         margin: const EdgeInsets.only(top: 100.0),
         child: Row(
@@ -87,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextFormField(
+                    obscureText: true,
                     autofocus: true,
                     onChanged: (newText) {
                       setState(() {
@@ -147,8 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        SpotlightViewFrame()));
+                                    builder: (context) => UserSettings()));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == "user-not-fount") {
                               _errorMessage = "No User Found for that Email.";
@@ -259,7 +261,12 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             child: const Text("Proceed"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SpotlightViewFrame()));
+            },
           ),
         ],
       ),
@@ -331,6 +338,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: InputDecoration(labelText: "New Email"),
           ),
           TextFormField(
+            obscureText: true,
             autofocus: true,
             onChanged: (newText) {
               setState(() {
