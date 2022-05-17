@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
         padding: const EdgeInsets.all(25.0),
         margin: const EdgeInsets.only(top: 100.0),
         child: Row(
@@ -88,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextFormField(
+                    obscureText: true,
                     autofocus: true,
                     onChanged: (newText) {
                       setState(() {
@@ -336,6 +338,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: InputDecoration(labelText: "New Email"),
           ),
           TextFormField(
+            obscureText: true,
             autofocus: true,
             onChanged: (newText) {
               setState(() {
