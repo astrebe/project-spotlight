@@ -4,6 +4,8 @@ import 'LoginScreen.dart';
 import 'package:spotlight_app/RecalledProductDatabase.dart';
 import 'package:spotlight_app/SpotlightFilterView.dart';
 import 'SpotlightViewFrame.dart';
+import 'userSettings.dart';
+import 'userPreferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
