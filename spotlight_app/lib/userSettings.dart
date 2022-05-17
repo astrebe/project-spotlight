@@ -16,8 +16,29 @@ class _UserSettingsState extends State<UserSettings> {
   String _firstName = "First Name";
   String _lastName = "Last Name";
   String _dob = "DOB";
-  String _location = "Location";
-  Color col = Color.fromARGB(255, 153, 0, 0);
+  String _retailer = "retailer";
+
+  List<String> retailers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  load() async {
+    retailers.clear();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    var preferences =
+        firestore.collection("user-preferences").doc(auth.currentUser!.uid);
+    var snapshot = await preferences.get();
+
+    for (var preference in snapshot.data()!["retailers"]) {
+      retailers.add(preference);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,68 +126,39 @@ class _UserSettingsState extends State<UserSettings> {
           Flexible(
             child: Row(
               children: [
-                const Text("Location:    "),
+                const Text("Add Retailer:    "),
                 Expanded(
                   child: TextFormField(
                     autofocus: true,
                     onChanged: (newText) {
                       setState(() {
-                        _location = newText;
+                        _retailer = newText;
                       });
                     },
                     decoration: InputDecoration(
-                      labelText: _location,
+                      labelText: _retailer,
                     ),
                   ),
                 ),
+                Expanded(
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          retailers.add(_retailer);
+                        },
+                        child: const Text("Add")))
               ],
             ),
           ),
           Flexible(
-            child: Row(
-              children: [
-                const Text("Color:   "),
-                Expanded(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () async {
-                            col = Color.fromARGB(255, 153, 0, 0);
-                          },
-                          child: const Text('Red'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color.fromARGB(255, 153, 0, 0)),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            col = Color.fromARGB(153, 0, 51, 255);
-                          },
-                          child: const Text('Blue'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(153, 0, 51, 255),
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            col = Color.fromARGB(153, 0, 255, 0);
-                          },
-                          child: const Text('Green'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(153, 0, 255, 0),
-                            ),
-                          ),
-                        ),
-                      ]),
-                ),
-              ],
-            ),
-          ),
+              child: Row(children: [
+            Text("Current Retailers: ${retailers.join(", ")}"),
+            Expanded(
+                child: ElevatedButton(
+                    onPressed: () async {
+                      retailers.clear();
+                    },
+                    child: const Text("Clear")))
+          ])),
           Flexible(
             child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -197,7 +189,19 @@ class _UserSettingsState extends State<UserSettings> {
                   width: 100,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      FirebaseFirestore db = FirebaseFirestore.instance;
+                      FirebaseAuth auth = FirebaseAuth.instance;
+                      final ret = <String, List<String>>{
+                        "retailers": retailers
+                      };
+                      db
+                          .collection("user-preferences")
+                          .doc(auth.currentUser!.uid)
+                          .set(ret)
+                          .onError(
+                              (e, _) => print("Error writing document: $e"));
+                    },
                     child: const Text('Save'),
                   ),
                 ),
@@ -207,9 +211,5 @@ class _UserSettingsState extends State<UserSettings> {
         ],
       )),
     );
-  }
-
-  Color getColor() {
-    return col;
   }
 }

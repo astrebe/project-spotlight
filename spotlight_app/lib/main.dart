@@ -5,6 +5,7 @@ import 'package:spotlight_app/RecalledProductDatabase.dart';
 import 'package:spotlight_app/SpotlightFilterView.dart';
 import 'SpotlightViewFrame.dart';
 import 'userSettings.dart';
+import 'userPreferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomInset: false,
-      body: const UserSettings(),
+      body: const LoginScreen(),
     );
   }
 }
