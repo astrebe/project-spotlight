@@ -26,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
         padding: const EdgeInsets.all(25.0),
         margin: const EdgeInsets.only(top: 100.0),
         child: Row(
@@ -150,7 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UserSettings()));
+                                    builder: (context) =>
+                                        SpotlightViewFrame()));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == "user-not-fount") {
                               _errorMessage = "No User Found for that Email.";
