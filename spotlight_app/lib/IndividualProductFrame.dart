@@ -43,7 +43,8 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                               )),
                       ])),
                 ] else ...[
-                  const Text("No images provided")
+                  const Text("No images provided"),
+                  const Text(""),
                 ],
                 if (widget.product.description != null) ...[
                   const Text("Description: ",
@@ -52,9 +53,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                   Text(widget.product.description!),
                   const Text(""),
                 ] else ...[
-                  const Text("No description provided")
+                  const Text("Description: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("No description provided"),
+                  const Text(""),
                 ],
-                if (widget.product.hazards != null) ...[
+                if (widget.product.hazards!.isNotEmpty) ...[
                   const Text("Hazard: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -62,9 +67,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.hazards![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("No hazard provided")
+                  const Text("Hazard: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("No hazard provided"),
+                  const Text(""),
                 ],
-                if (widget.product.injuries != null) ...[
+                if (widget.product.injuries!.isNotEmpty) ...[
                   const Text("Injuries/incidents: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -72,9 +81,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.injuries![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("No injuries reported/provided")
+                  const Text("Injuries/incidents: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("No injuries reported/provided"),
+                  const Text(""),
                 ],
-                if (widget.product.remedies != null) ...[
+                if (widget.product.remedies!.isNotEmpty) ...[
                   const Text("Remedies: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -82,7 +95,11 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.remedies![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("No remedies provided")
+                  const Text("Remedies: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("No remedies provided"),
+                  const Text(""),
                 ],
                 if (widget.product.recallDate != null) ...[
                   const Text("Recall Date: ",
@@ -91,9 +108,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                   Text(widget.product.recallDate!.toString()),
                   const Text(""),
                 ] else ...[
-                  const Text("No recall date provided")
+                  const Text("Recall Date: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("No recall date provided"),
+                  const Text(""),
                 ],
-                if (widget.product.products != null) ...[
+                if (widget.product.products!.isNotEmpty) ...[
                   const Text("Units: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -101,7 +122,11 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.products![i].numberOfUnits!),
                   const Text(""),
                 ] else ...[
-                  const Text("Number of units not provided")
+                  const Text("Units: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Number of units not provided"),
+                  const Text(""),
                 ],
                 if (widget.product.consumerContact != null) ...[
                   const Text("Consumer Contact: ",
@@ -110,9 +135,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                   Text(widget.product.consumerContact!),
                   const Text(""),
                 ] else ...[
-                  const Text("Contact information not provided")
+                  const Text("Consumer Contact: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Contact information not provided"),
+                  const Text(""),
                 ],
-                if (widget.product.retailers != null) ...[
+                if (widget.product.retailers!.isNotEmpty) ...[
                   const Text("Retailers: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -120,9 +149,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.retailers![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("Retail locations not provided")
+                  const Text("Retailers: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Retail locations not provided"),
+                  const Text(""),
                 ],
-                if (widget.product.importers != null) ...[
+                if (widget.product.importers!.isNotEmpty) ...[
                   const Text("Importers: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -130,9 +163,13 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.importers![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("Importers not provided")
+                  const Text("Importers: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Importers not provided"),
+                  const Text(""),
                 ],
-                if (widget.product.manufacturers != null) ...[
+                if (widget.product.manufacturers!.isNotEmpty) ...[
                   const Text("Manufacturer: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
@@ -140,19 +177,25 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                     Text(widget.product.manufacturers![i].name!),
                   const Text(""),
                 ] else ...[
-                  const Text("Manufacturer not provided")
+                  const Text("Manufacturer: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Manufacturer not provided"),
+                  const Text(""),
                 ],
-                if (widget.product.manufacturerCountries != null) ...[
+                if (widget.product.manufacturerCountries!.isNotEmpty) ...[
                   const Text("Origin Country: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   const Text(""),
-                  for (var i = 0;
-                      i < widget.product.manufacturerCountries!.length;
-                      i++)
+                  for (var i = 0; i < widget.product.manufacturerCountries!.length; i++)
                     Text(widget.product.manufacturerCountries![i].country!),
                   const Text(""),
                 ] else ...[
-                  const Text("Countries not provided")
+                  const Text("Origin Country: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Countries not provided"),
+                  const Text(""),
                 ],
                 if (widget.product.recallNumber != null) ...[
                   const Text("Recall Number: ",
@@ -161,7 +204,11 @@ class _IndividualProductFrameState extends State<IndividualProductFrame> {
                   Text(widget.product.recallId!.toString()),
                   const Text(""),
                 ] else ...[
-                  const Text("Recall number not provided")
+                  const Text("Recall Number: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(""),
+                  const Text("Recall number not provided"),
+                  const Text(""),
                 ],
               ],
             )));
